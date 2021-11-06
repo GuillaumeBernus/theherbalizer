@@ -1,0 +1,7 @@
+C:\Source\theherbalizer\theHerbalizer\MowerAPI\obj\Debug\net5.0\MowerAPI.csproj.AssemblyReference.cache
+C:\Source\theherbalizer\theHerbalizer\MowerAPI\obj\Debug\net5.0\MowerAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Source\theherbalizer\theHerbalizer\MowerAPI\obj\Debug\net5.0\MowerAPI.AssemblyInfoInputs.cache
+C:\Source\theherbalizer\theHerbalizer\MowerAPI\obj\Debug\net5.0\MowerAPI.AssemblyInfo.cs
+C:\Source\theherbalizer\theHerbalizer\MowerAPI\obj\Debug\net5.0\MowerAPI.csproj.CoreCompileInputs.cache
+C:\Source\theherbalizer\theHerbalizer\MowerAPI\obj\Debug\net5.0\MowerAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Source\theherbalizer\theHerbalizer\MowerAPI\obj\Debug\net5.0\MowerAPI.MvcApplicationPartsAssemblyInfo.cache

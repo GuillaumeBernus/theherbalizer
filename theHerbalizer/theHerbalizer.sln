@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MowerEngine", "MowerEngine\MowerEngine.csproj", "{8E4B7B27-135C-41A2-832B-F948E87367E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E9EDE6F6-63E6-4618-B70C-FDFFE0B1B79C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MowerAPI", "MowerAPI\MowerAPI.csproj", "{0DC04DFE-00DC-4A2E-BFBE-2BE3DD78C446}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{302D0A01-5253-41F1-8303-11B2A2A3D971}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lawn", "Lawn", "{7172BF4D-2C6F-4264-9408-5BEE374FA525}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LawnFile", "LawnFile", "{C8A2948D-D02D-42B4-8FE4-C8CE8D098944}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LawnFileAPI", "LawnFileAPI\LawnFileAPI.csproj", "{2D6CB404-6116-471E-A12E-EA06AB64690B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LawnFile.Domain", "LawnFile.Domain\LawnFile.Domain.csproj", "{BC0A84E8-8108-46E2-B48D-B492E662D662}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E4B7B27-135C-41A2-832B-F948E87367E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E4B7B27-135C-41A2-832B-F948E87367E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E4B7B27-135C-41A2-832B-F948E87367E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E4B7B27-135C-41A2-832B-F948E87367E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DC04DFE-00DC-4A2E-BFBE-2BE3DD78C446}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DC04DFE-00DC-4A2E-BFBE-2BE3DD78C446}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DC04DFE-00DC-4A2E-BFBE-2BE3DD78C446}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DC04DFE-00DC-4A2E-BFBE-2BE3DD78C446}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D6CB404-6116-471E-A12E-EA06AB64690B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D6CB404-6116-471E-A12E-EA06AB64690B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D6CB404-6116-471E-A12E-EA06AB64690B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D6CB404-6116-471E-A12E-EA06AB64690B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC0A84E8-8108-46E2-B48D-B492E662D662}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC0A84E8-8108-46E2-B48D-B492E662D662}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC0A84E8-8108-46E2-B48D-B492E662D662}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC0A84E8-8108-46E2-B48D-B492E662D662}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8E4B7B27-135C-41A2-832B-F948E87367E3} = {7172BF4D-2C6F-4264-9408-5BEE374FA525}
+		{0DC04DFE-00DC-4A2E-BFBE-2BE3DD78C446} = {7172BF4D-2C6F-4264-9408-5BEE374FA525}
+		{7172BF4D-2C6F-4264-9408-5BEE374FA525} = {E9EDE6F6-63E6-4618-B70C-FDFFE0B1B79C}
+		{C8A2948D-D02D-42B4-8FE4-C8CE8D098944} = {E9EDE6F6-63E6-4618-B70C-FDFFE0B1B79C}
+		{2D6CB404-6116-471E-A12E-EA06AB64690B} = {C8A2948D-D02D-42B4-8FE4-C8CE8D098944}
+		{BC0A84E8-8108-46E2-B48D-B492E662D662} = {C8A2948D-D02D-42B4-8FE4-C8CE8D098944}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3CF973BF-CEE3-4F29-86D9-10B8A10348B5}
+	EndGlobalSection
+EndGlobal

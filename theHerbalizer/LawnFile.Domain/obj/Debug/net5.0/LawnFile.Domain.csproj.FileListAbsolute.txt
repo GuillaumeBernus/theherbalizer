@@ -1,0 +1,12 @@
+C:\Source\theherbalizer\theHerbalizer\LawnFile.Domain\bin\Debug\net5.0\LawnFile.Domain.deps.json
+C:\Source\theherbalizer\theHerbalizer\LawnFile.Domain\bin\Debug\net5.0\LawnFile.Domain.dll
+C:\Source\theherbalizer\theHerbalizer\LawnFile.Domain\bin\Debug\net5.0\ref\LawnFile.Domain.dll
+C:\Source\theherbalizer\theHerbalizer\LawnFile.Domain\bin\Debug\net5.0\LawnFile.Domain.pdb
+C:\Source\theherbalizer\theHerbalizer\LawnFile.Domain\obj\Debug\net5.0\LawnFile.Domain.csproj.AssemblyReference.cache
+C:\Source\theherbalizer\theHerbalizer\LawnFile.Domain\obj\Debug\net5.0\LawnFile.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Source\theherbalizer\theHerbalizer\LawnFile.Domain\obj\Debug\net5.0\LawnFile.Domain.AssemblyInfoInputs.cache
+C:\Source\theherbalizer\theHerbalizer\LawnFile.Domain\obj\Debug\net5.0\LawnFile.Domain.AssemblyInfo.cs
+C:\Source\theherbalizer\theHerbalizer\LawnFile.Domain\obj\Debug\net5.0\LawnFile.Domain.csproj.CoreCompileInputs.cache
+C:\Source\theherbalizer\theHerbalizer\LawnFile.Domain\obj\Debug\net5.0\LawnFile.Domain.dll
+C:\Source\theherbalizer\theHerbalizer\LawnFile.Domain\obj\Debug\net5.0\ref\LawnFile.Domain.dll
+C:\Source\theherbalizer\theHerbalizer\LawnFile.Domain\obj\Debug\net5.0\LawnFile.Domain.pdb

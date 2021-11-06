@@ -1,0 +1,88 @@
+﻿using LawnFile.Domain.Interface;
+using LawnFile.Domain.Model;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LawnFile.Domain.Handler
+{
+    public class LawnFileHandler : ILawnFileHandler
+    {
+
+        public LawnFileHandler()
+        {
+
+        }
+        public async Task<Lawn> HandleAsync(string filePath)
+        {
+
+
+
+            using StreamReader srIn = new StreamReader(filePath, true);
+
+            if(srIn.EndOfStream)
+            { 
+                throw new Exception("Empty file"); 
+            }
+
+
+            var lawnSize = await srIn.ReadLineAsync().ConfigureAwait(false);
+            
+            if (!lawnSize.IsLawnDescription())
+            {
+                throw new Exception("First Line is not a lawn description");
+            }
+
+
+            var mowerDescriptions = new List<MowerDescription>();
+            while (!srIn.EndOfStream)
+            {
+                var mowerDescription = await srIn.ExtractMowerDescriptionAsync();
+
+
+                if(!mowerDescription.Check())
+                {
+                    throw new Exception("Wrong mower description");
+                }
+                mowerDescriptions.Add(mowerDescription);
+            }
+
+            var lawnDescription = new LawnDescription
+            {
+                UpperRightCorner = lawnSize,
+                MowerDescriptions = mowerDescriptions
+            };
+
+            return Lawn.FromLawnDescription(lawnDescription);
+        }
+
+
+
+
+
+    }
+
+    class MowerDescription
+    {
+        public string StartPosition { get; set; }
+
+        public string Route { get; set; }
+
+
+        public bool Check()
+        {
+            return StartPosition.IsMowerDescription() && Route.IsMowerRoute();
+
+        }
+    }
+
+    class LawnDescription
+    {
+        public string UpperRightCorner { get; set; }
+
+        public IEnumerable<MowerDescription> MowerDescriptions { get; set; }
+    }
+}

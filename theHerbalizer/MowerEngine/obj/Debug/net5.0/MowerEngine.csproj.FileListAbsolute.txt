@@ -1,0 +1,5 @@
+C:\Source\theherbalizer\theHerbalizer\MowerEngine\obj\Debug\net5.0\MowerEngine.csproj.AssemblyReference.cache
+C:\Source\theherbalizer\theHerbalizer\MowerEngine\obj\Debug\net5.0\MowerEngine.GeneratedMSBuildEditorConfig.editorconfig
+C:\Source\theherbalizer\theHerbalizer\MowerEngine\obj\Debug\net5.0\MowerEngine.AssemblyInfoInputs.cache
+C:\Source\theherbalizer\theHerbalizer\MowerEngine\obj\Debug\net5.0\MowerEngine.AssemblyInfo.cs
+C:\Source\theherbalizer\theHerbalizer\MowerEngine\obj\Debug\net5.0\MowerEngine.csproj.CoreCompileInputs.cache
