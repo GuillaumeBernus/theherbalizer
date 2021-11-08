@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MowerEngine.Models
 {
-    public class Field
+    public class Lawn
     {
-        public int Size { get; set; }
+        public Point UpperRigthCorner { get; set; }
 
         public IEnumerable<Mower> Mowers { get; set; }
 
@@ -18,11 +18,15 @@ namespace MowerEngine.Models
 
             foreach (var mower in Mowers)
             {
-                result.Add(mower.Run(Size));
+                result.Add(mower.Run(this).StartPosition);
             }
 
             return result;
         }
 
+        internal bool Contains(Point point)
+        {
+            return point.X >= 0 && point.Y >= 0 && point.X <= this.UpperRigthCorner.X && point.Y <= this.UpperRigthCorner.Y;
+        }
     }
 }

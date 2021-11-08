@@ -3,3 +3,10 @@ C:\Source\theherbalizer\theHerbalizer\MowerEngine\obj\Debug\net5.0\MowerEngine.G
 C:\Source\theherbalizer\theHerbalizer\MowerEngine\obj\Debug\net5.0\MowerEngine.AssemblyInfoInputs.cache
 C:\Source\theherbalizer\theHerbalizer\MowerEngine\obj\Debug\net5.0\MowerEngine.AssemblyInfo.cs
 C:\Source\theherbalizer\theHerbalizer\MowerEngine\obj\Debug\net5.0\MowerEngine.csproj.CoreCompileInputs.cache
+C:\Source\theherbalizer\theHerbalizer\MowerEngine\bin\Debug\net5.0\MowerEngine.deps.json
+C:\Source\theherbalizer\theHerbalizer\MowerEngine\bin\Debug\net5.0\MowerEngine.dll
+C:\Source\theherbalizer\theHerbalizer\MowerEngine\bin\Debug\net5.0\ref\MowerEngine.dll
+C:\Source\theherbalizer\theHerbalizer\MowerEngine\bin\Debug\net5.0\MowerEngine.pdb
+C:\Source\theherbalizer\theHerbalizer\MowerEngine\obj\Debug\net5.0\MowerEngine.dll
+C:\Source\theherbalizer\theHerbalizer\MowerEngine\obj\Debug\net5.0\ref\MowerEngine.dll
+C:\Source\theherbalizer\theHerbalizer\MowerEngine\obj\Debug\net5.0\MowerEngine.pdb

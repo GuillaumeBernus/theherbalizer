@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MowerAPI
+namespace Lawn.API
 {
     public class Program
     {

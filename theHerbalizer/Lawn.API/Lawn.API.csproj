@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <UserSecretsId>62f38bf6-0bc8-4867-bb50-b10e4dd757fc</UserSecretsId>
+    <UserSecretsId>26c40b7d-1546-47e4-b1a8-651c8db576d3</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LawnFile.Domain\LawnFile.Domain.csproj" />
+    <ProjectReference Include="..\MowerEngine\MowerEngine.csproj" />
   </ItemGroup>
 
 </Project>

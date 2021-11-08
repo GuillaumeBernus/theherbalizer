@@ -3,65 +3,75 @@ using System;
 
 namespace MowerEngine.Models
 {
-    public class MowerPosition
+    public class MowerPosition:ICloneable
     {
-        public int X { get; set; }
-        public int Y { get; set; }
 
+        public Point Position { get; set; }
         public Direction Orientation { get; set; }
 
-
-        public void ApplyAction(Action action)
+        public override string ToString()
         {
+            return $"{Position?.ToString() ?? String.Empty} {Orientation.ToString()}";
+        }
 
-            GetActionApplier(action).Apply(this);
 
-            if (action == Action.R)
+        public MowerPosition ApplyAction(MowerAction action)
+        {
+            MowerPosition finalPoint = (MowerPosition)this.Clone();
+
+            if (action == MowerAction.R)
             {
-                if (Orientation == Direction.W)
+                if (finalPoint.Orientation == Direction.W)
                 {
-                    Orientation = Direction.N;
+                    finalPoint.Orientation = Direction.N;
                 }
                 else
                 {
-                    Orientation++;
+                   finalPoint.Orientation++;
                 }
             }
 
-            if (action == Action.L)
+            if (action == MowerAction.L)
             {
-                if (Orientation == Direction.N)
+                if (finalPoint.Orientation == Direction.N)
                 {
-                    Orientation = Direction.W;
+                    finalPoint.Orientation = Direction.W;
                 }
                 else
                 {
-                    Orientation--;
+                    finalPoint.Orientation--;
                 }
             }
-            if (action == Action.F)
+            if (action == MowerAction.F)
             {
-                switch (Orientation)
+                switch (finalPoint.Orientation)
                 {
                     case Direction.N:
-                        Y++;
+                        finalPoint.Position.Y++;
                         break;
                     case Direction.E:
-                        X++;
+                        finalPoint.Position.X++;
                         break;
                     case Direction.S:
-                        Y--;
+                        finalPoint.Position.Y--;
                         break;
                     case Direction.W:
-                        X--;
+                        finalPoint.Position.X--;
                         break;
                     default:
                         break;
                 }
             }
+            return finalPoint;
         }
 
-        
+        public object Clone()
+        {
+            MowerPosition clone = new MowerPosition();
+            clone.Position = (Point)this.Position.Clone();
+            clone.Orientation = this.Orientation;
+            return clone;
+        }
     }
 }
 

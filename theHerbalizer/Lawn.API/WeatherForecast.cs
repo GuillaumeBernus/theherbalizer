@@ -1,6 +1,6 @@
 using System;
 
-namespace MowerAPI
+namespace Lawn.API
 {
     public class WeatherForecast
     {

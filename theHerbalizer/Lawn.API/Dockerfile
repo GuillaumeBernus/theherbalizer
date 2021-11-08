@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["MowerAPI/MowerAPI.csproj", "MowerAPI/"]
-RUN dotnet restore "MowerAPI/MowerAPI.csproj"
+COPY ["Lawn.API/Lawn.API.csproj", "Lawn.API/"]
+RUN dotnet restore "Lawn.API/Lawn.API.csproj"
 COPY . .
-WORKDIR "/src/MowerAPI"
-RUN dotnet build "MowerAPI.csproj" -c Release -o /app/build
+WORKDIR "/src/Lawn.API"
+RUN dotnet build "Lawn.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "MowerAPI.csproj" -c Release -o /app/publish
+RUN dotnet publish "Lawn.API.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "MowerAPI.dll"]
+ENTRYPOINT ["dotnet", "Lawn.API.dll"]

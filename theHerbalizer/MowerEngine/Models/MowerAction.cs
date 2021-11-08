@@ -1,23 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MowerEngine.Models
+﻿namespace MowerEngine.Models
 {
-    public abstract class MowerActionBase
+    public enum MowerAction
     {
-        public Action Action { get; set; }
-
-        public abstract MowerPosition Apply(MowerPosition start);
+        L,
+        R,
+        F
     }
-
-    public  class MowerActionL: MowerActionBase
-    {
-        public override MowerPosition Apply(MowerPosition start)
-        {
-            
-
-        }
-    }
+}
