@@ -32,6 +32,7 @@ namespace Lawn.API
             {
                 var enumConverter = new JsonStringEnumConverter();
                 opts.JsonSerializerOptions.Converters.Add(enumConverter);
+                opts.JsonSerializerOptions.PropertyNameCaseInsensitive=true;
             });
             services.AddSwaggerGen(c =>
             {
@@ -45,12 +46,12 @@ namespace Lawn.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-               
             }
             else
             {
                 app.UseExceptionHandler("/error");
             }
+            
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Lawn.API v1"));
             

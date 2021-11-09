@@ -1,5 +1,4 @@
-﻿using LawnFile.Domain.Handler;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,9 +10,9 @@ namespace LawnFile.Domain.Model
 
         public IEnumerable<MowerAction> Route { get; set; }
 
-        internal static IEnumerable<Mower> FromMowerDescriptionList(IEnumerable<MowerDescription> mowerDescriptions)
+        internal static List<Mower> FromMowerDescriptionList(IEnumerable<MowerDescription> mowerDescriptions)
         {
-            return mowerDescriptions.Select(FromMowerDescription);
+            return mowerDescriptions.Select(FromMowerDescription).ToList();
         }
 
         private static Mower FromMowerDescription(MowerDescription mowerDescription)
