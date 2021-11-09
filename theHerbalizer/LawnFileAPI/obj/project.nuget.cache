@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "6QEOBW5ylBBnNxAoEJlgWruALuDbFNiAgiEnyFlmhTRz/6peW1gWqMshzJsOPk0SGCtrnsVWx6RxyIhn/s1GAg==",
+  "dgSpecHash": "kAAZgI3zjwjRaTB+JCqc7v5NtzmllqB7DkzWGv1DoCi4DHnZRMsGdJs9TDbFwEr0CobhTs/c/gBmrZztSnVFsw==",
   "success": true,
   "projectFilePath": "C:\\Source\\theherbalizer\\theHerbalizer\\LawnFileAPI\\LawnFileAPI.csproj",
   "expectedPackageFiles": [
@@ -10,7 +10,8 @@
     "C:\\Users\\guillaume.bernus\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
     "C:\\Users\\guillaume.bernus\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
     "C:\\Users\\guillaume.bernus\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
-    "C:\\Users\\guillaume.bernus\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+    "C:\\Users\\guillaume.bernus\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512",
+    "C:\\Users\\guillaume.bernus\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.12\\microsoft.netcore.app.host.win-x64.5.0.12.nupkg.sha512"
   ],
   "logs": []
 }
