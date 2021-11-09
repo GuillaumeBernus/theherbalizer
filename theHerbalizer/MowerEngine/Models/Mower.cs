@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace MowerEngine.Models
 {
+
     public class Mower
     {
-
-        public MowerPosition StartPosition { get; set; }
+        [JsonPropertyName("startposition")]
+        public MowerPosition Position { get; set; }
 
         public IEnumerable<MowerAction> Route { get; set; }
 
@@ -13,14 +16,19 @@ namespace MowerEngine.Models
         {
             foreach (var action in this.Route)
             {
-                var possiblePosition = this.StartPosition.ApplyAction(action);
-
-                if (lawn.Contains(possiblePosition.Position))
-                {
-                    this.StartPosition = possiblePosition;
-                }
+                ApplyAction(lawn,action);
             }
             return this;
+        }
+
+        private void ApplyAction(Lawn lawn, MowerAction action)
+        {
+            var possiblePosition = this.Position.CloneAndApplyAction(action);
+
+            if (action != MowerAction.F || lawn.Contains(possiblePosition.Coordinates))
+            {
+                this.Position = possiblePosition;
+            }
         }
     }
 }
