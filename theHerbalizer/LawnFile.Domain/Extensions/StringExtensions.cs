@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
-namespace LawnFile.Domain.Handler
+namespace LawnFile.Domain.Extensions
 {
     static class StringExtensions
     {
@@ -21,8 +16,8 @@ namespace LawnFile.Domain.Handler
             Regex regex = new Regex(@"^\d+ \d+ (N|E|S|W)$", RegexOptions.None);
 
             return regex.IsMatch(line);
-        }  
-        
+        }
+
         public static bool IsMowerRoute(this string line)
         {
             Regex regex = new Regex(@"^(L|R|F)+$", RegexOptions.None);
