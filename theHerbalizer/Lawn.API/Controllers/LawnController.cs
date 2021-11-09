@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Lawn.API.Controllers
 {
+    /// <summary>
+    /// Controller that handles the lawn 
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class LawnController : ControllerBase
@@ -22,6 +25,11 @@ namespace Lawn.API.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lawn">a lawn description</param>
+        /// <returns>the position of the different mowers of the lawn</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
