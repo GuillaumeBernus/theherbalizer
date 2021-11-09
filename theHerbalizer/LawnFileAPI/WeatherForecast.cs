@@ -1,6 +1,6 @@
 using System;
 
-namespace LawnFileAPI
+namespace LawnFile.API
 {
     public class WeatherForecast
     {

@@ -1,6 +1,6 @@
 using LawnFile.Domain.Handler;
 using LawnFile.Domain.Interface;
-using LawnFileAPI.Configuration;
+using LawnFile.API.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -16,7 +16,7 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace LawnFileAPI
+namespace LawnFile.API
 {
     public class Startup
     {
@@ -39,7 +39,7 @@ namespace LawnFileAPI
                    });
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "LawnFileAPI", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "LawnFile.API", Version = "v1" });
             });
             services.Configure<InputFileConfiguration>(_configuration.GetSection("InputFile"));
             services.AddSingleton<ILawnFileHandler, LawnFileHandler>();
@@ -52,7 +52,7 @@ namespace LawnFileAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LawnFileAPI v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LawnFile.API v1"));
             }
 
             app.UseHttpsRedirection();

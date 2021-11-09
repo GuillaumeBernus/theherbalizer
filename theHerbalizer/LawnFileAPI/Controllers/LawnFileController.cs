@@ -1,6 +1,6 @@
 ﻿using LawnFile.Domain.Interface;
 using LawnFile.Domain.Model;
-using LawnFileAPI.Configuration;
+using LawnFile.API.Configuration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -11,7 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LawnFileAPI.Controllers
+namespace LawnFile.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]

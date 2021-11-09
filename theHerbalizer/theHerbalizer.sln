@@ -13,11 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lawn", "Lawn", "{7172BF4D-2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LawnFile", "LawnFile", "{C8A2948D-D02D-42B4-8FE4-C8CE8D098944}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LawnFileAPI", "LawnFileAPI\LawnFileAPI.csproj", "{2D6CB404-6116-471E-A12E-EA06AB64690B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LawnFile.API", "LawnFileAPI\LawnFile.API.csproj", "{2D6CB404-6116-471E-A12E-EA06AB64690B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LawnFile.Domain", "LawnFile.Domain\LawnFile.Domain.csproj", "{BC0A84E8-8108-46E2-B48D-B492E662D662}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lawn.API", "Lawn.API\Lawn.API.csproj", "{A8984CC8-F6C0-4CD1-8B16-294CCCD50208}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lawn.API", "Lawn.API\Lawn.API.csproj", "{A8984CC8-F6C0-4CD1-8B16-294CCCD50208}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
