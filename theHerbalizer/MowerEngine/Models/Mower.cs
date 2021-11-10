@@ -10,7 +10,7 @@ namespace MowerEngine.Models
         [JsonPropertyName("startposition")]
         public MowerPosition Position { get; set; }
 
-        public IEnumerable<MowerAction> Route { get; set; }
+        public List<MowerAction> Route { get; set; }
 
         public Mower Run (Lawn lawn)
         {

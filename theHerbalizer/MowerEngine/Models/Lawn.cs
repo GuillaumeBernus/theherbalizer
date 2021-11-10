@@ -8,16 +8,20 @@ namespace MowerEngine.Models
 
         public List<Mower> Mowers { get; set; }
 
-        public IEnumerable<MowerPosition> RunMowers()
+
+        public List<MowerPosition> RunMowers
         {
-            var result = new List<MowerPosition>(Mowers.Count);
-
-            foreach (var mower in Mowers)
+            get
             {
-                result.Add(mower.Run(this).Position);
-            }
+                var result = new List<MowerPosition>(Mowers.Count);
 
-            return result;
+                foreach (var mower in Mowers)
+                {
+                    result.Add(mower.Run(this).Position);
+                }
+
+                return result;
+            }
         }
 
         internal bool Contains(Point point)

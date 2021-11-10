@@ -35,10 +35,9 @@ namespace Lawn.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
        
-        public ActionResult<IEnumerable<MowerPosition>> Post([FromBody] MowerEngine.Models.Lawn lawn)
+        public ActionResult<List<MowerPosition>> Post([FromBody] MowerEngine.Models.Lawn lawn)
         {
-            return Ok(lawn.RunMowers());
-           
+            return Ok(lawn.RunMowers);
         }
     }
 }
