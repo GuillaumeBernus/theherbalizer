@@ -9,12 +9,10 @@ namespace MowerEngine.Models
     public class Mower
     {
 
-
         public Mower()
         {
 
         }
-        
         public Mower(Lawn lawn)
         {
             this.Lawn = lawn;

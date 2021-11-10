@@ -13,12 +13,11 @@ namespace MowerEngine.Models
         [Required]
         public List<Mower> Mowers { get; set; }
 
-
-
         public Lawn()
         {
 
         }
+
         [JsonConstructor()]
         public Lawn(List<Mower> mowers ):base()
         {
