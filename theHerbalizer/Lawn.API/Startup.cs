@@ -1,48 +1,37 @@
-using LawnFile.Domain.Handler;
-using LawnFile.Domain.Interface;
-using LawnFile.API.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
-namespace LawnFile.API
+namespace Lawn.API
 {
     public class Startup
     {
         public Startup(IConfiguration configuration)
         {
-            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            Configuration = configuration;
         }
 
-        private readonly IConfiguration _configuration;
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers()
-                   .AddJsonOptions(opts =>
-                   {
-                       var enumConverter = new JsonStringEnumConverter();
-                       opts.JsonSerializerOptions.Converters.Add(enumConverter);
-                   });
+            services.AddControllers().AddJsonOptions(opts =>
+            {
+                var enumConverter = new JsonStringEnumConverter();
+                opts.JsonSerializerOptions.Converters.Add(enumConverter);
+                opts.JsonSerializerOptions.PropertyNameCaseInsensitive=true;
+            });
+            services.AddRouting(options => options.LowercaseUrls = true);
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "LawnFile.API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Lawn.API", Version = "v1" });
             });
-            services.Configure<InputFileConfiguration>(_configuration.GetSection("InputFile"));
-            services.AddSingleton<ILawnFileHandler, LawnFileHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,10 +40,15 @@ namespace LawnFile.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LawnFile.API v1"));
             }
-
+            else
+            {
+                app.UseExceptionHandler("/error");
+            }
+            
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Lawn.API v1"));
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();

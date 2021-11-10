@@ -1,67 +1,38 @@
 ﻿
+using MowerEngine.MowerActionHandlers;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace MowerEngine.Models
 {
-    public class MowerPosition
+    public class MowerPosition:ICloneable
     {
-        public int X { get; set; }
-        public int Y { get; set; }
 
+        [Required]
+        public Point Coordinates { get; set; }
+        [Required]
         public Direction Orientation { get; set; }
 
-
-        public void ApplyAction(Action action)
+        public override string ToString()
         {
-
-            GetActionApplier(action).Apply(this);
-
-            if (action == Action.R)
-            {
-                if (Orientation == Direction.W)
-                {
-                    Orientation = Direction.N;
-                }
-                else
-                {
-                    Orientation++;
-                }
-            }
-
-            if (action == Action.L)
-            {
-                if (Orientation == Direction.N)
-                {
-                    Orientation = Direction.W;
-                }
-                else
-                {
-                    Orientation--;
-                }
-            }
-            if (action == Action.F)
-            {
-                switch (Orientation)
-                {
-                    case Direction.N:
-                        Y++;
-                        break;
-                    case Direction.E:
-                        X++;
-                        break;
-                    case Direction.S:
-                        Y--;
-                        break;
-                    case Direction.W:
-                        X--;
-                        break;
-                    default:
-                        break;
-                }
-            }
+            return $"{Coordinates?.ToString() ?? String.Empty} {Orientation.ToString()}";
         }
 
-        
+
+        public MowerPosition CloneAndApplyAction(MowerAction action)
+        {
+            MowerPosition finalPosition = this.Clone() as MowerPosition;
+            MowerActionHandlerFactory.GetMowerActionHandler(action).ApplyMowerAction(ref finalPosition);
+            return finalPosition;
+        }
+
+        public object Clone()
+        {
+            MowerPosition clone = new MowerPosition();
+            clone.Coordinates = (Point)this.Coordinates.Clone();
+            clone.Orientation = this.Orientation;
+            return clone;
+        }
     }
 }
 

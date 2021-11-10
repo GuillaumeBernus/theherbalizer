@@ -1,6 +1,6 @@
 using System;
 
-namespace LawnFile.API
+namespace theHerbalizerGateway
 {
     public class WeatherForecast
     {

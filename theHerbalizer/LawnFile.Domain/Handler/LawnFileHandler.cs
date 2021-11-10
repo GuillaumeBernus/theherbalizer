@@ -1,4 +1,5 @@
-﻿using LawnFile.Domain.Interface;
+﻿using LawnFile.Domain.Extensions;
+using LawnFile.Domain.Interface;
 using LawnFile.Domain.Model;
 using System;
 using System.Collections.Generic;
@@ -63,26 +64,5 @@ namespace LawnFile.Domain.Handler
 
 
 
-    }
-
-    class MowerDescription
-    {
-        public string StartPosition { get; set; }
-
-        public string Route { get; set; }
-
-
-        public bool Check()
-        {
-            return StartPosition.IsMowerDescription() && Route.IsMowerRoute();
-
-        }
-    }
-
-    class LawnDescription
-    {
-        public string UpperRightCorner { get; set; }
-
-        public IEnumerable<MowerDescription> MowerDescriptions { get; set; }
     }
 }
