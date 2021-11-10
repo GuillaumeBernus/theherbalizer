@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace MowerEngine.Models
@@ -11,10 +12,12 @@ namespace MowerEngine.Models
         private Guid _mowerId = Guid.NewGuid();
 
         public Guid MowerId { get => _mowerId; }
-        
+
+        [Required]
         [JsonPropertyName("startposition")]
         public MowerPosition Position { get; set; }
 
+        [Required]
         public List<MowerAction> Route { get; set; }
 
         public Mower Run (Lawn lawn)

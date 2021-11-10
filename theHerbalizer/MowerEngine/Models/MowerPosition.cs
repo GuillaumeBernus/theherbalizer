@@ -1,13 +1,16 @@
 ﻿
 using MowerEngine.MowerActionHandlers;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace MowerEngine.Models
 {
     public class MowerPosition:ICloneable
     {
 
+        [Required]
         public Point Coordinates { get; set; }
+        [Required]
         public Direction Orientation { get; set; }
 
         public override string ToString()

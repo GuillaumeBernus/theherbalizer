@@ -1,27 +1,27 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 namespace MowerEngine.Models
 {
     public class Lawn
     {
+        [Required]
         public Point UpperRigthCorner { get; set; }
 
+        [Required]
         public List<Mower> Mowers { get; set; }
 
 
-        public List<MowerPosition> RunMowers
+        public List<MowerPosition> RunMowers()
         {
-            get
+            var result = new List<MowerPosition>(Mowers.Count);
+
+            foreach (var mower in Mowers)
             {
-                var result = new List<MowerPosition>(Mowers.Count);
-
-                foreach (var mower in Mowers)
-                {
-                    result.Add(mower.Run(this).Position);
-                }
-
-                return result;
+                result.Add(mower.Run(this).Position);
             }
+
+            return result;
         }
 
         internal bool Contains(Point point)

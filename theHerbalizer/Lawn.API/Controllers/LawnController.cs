@@ -16,8 +16,6 @@ namespace Lawn.API.Controllers
     [Route("[controller]")]
     public class LawnController : ControllerBase
     {
-   
-
         private readonly ILogger<LawnController> _logger;
 
         public LawnController(ILogger<LawnController> logger)
@@ -37,7 +35,7 @@ namespace Lawn.API.Controllers
        
         public ActionResult<List<MowerPosition>> Post([FromBody] MowerEngine.Models.Lawn lawn)
         {
-            return Ok(lawn.RunMowers);
+            return Ok(lawn.RunMowers());
         }
     }
 }

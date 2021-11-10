@@ -4,7 +4,7 @@ namespace LawnFile.Domain.Model
 {
     public class MowerPosition
     {
-        public Point Position { get; set; }
+        public Point Coordinates { get; set; }
 
         public Direction Orientation { get; set; }
 
@@ -30,7 +30,7 @@ namespace LawnFile.Domain.Model
 
             mowerPosition= new MowerPosition
             {
-                Position = position,
+                Coordinates = position,
                 Orientation = orientation
             };
             return true;
