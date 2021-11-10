@@ -7,6 +7,11 @@ namespace MowerEngine.Models
 
     public class Mower
     {
+
+        private Guid _mowerId = Guid.NewGuid();
+
+        public Guid MowerId { get => _mowerId; }
+        
         [JsonPropertyName("startposition")]
         public MowerPosition Position { get; set; }
 
