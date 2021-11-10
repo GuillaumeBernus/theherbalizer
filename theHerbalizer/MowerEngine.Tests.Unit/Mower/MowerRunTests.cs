@@ -15,24 +15,26 @@ namespace MowerEngine.Tests.Unit
         {
             var expectedPosition = new MowerPosition
             {
-                Coordinates = new Point { X = 2, Y = 5 }
-                    ,
+                Coordinates = new Point { X = 2, Y = 5 },
                 Orientation = Direction.N
             };
-            var mower = new Mower
-            {
-                Position = expectedPosition.Clone() as MowerPosition,
-                Route = new List<MowerAction> { MowerAction.F }
-            };
+            
 
             var lawn = new Lawn
             {
-                Mowers = new List<Mower> { mower },
+                Mowers = new List<Mower> (),
                 UpperRigthCorner = new Point { X = 5, Y = 5 }
             };
 
+            var mower = new Mower
+            {
+                Position = expectedPosition.Clone() as MowerPosition,
+                Route = new List<MowerAction> { MowerAction.F },
+                Lawn = lawn
+            };
+            lawn.Mowers.Add(mower);
 
-            mower.Run(lawn);
+            mower.Run();
             Assert.Equal(expectedPosition.Orientation, mower.Position.Orientation);
             Assert.NotNull(mower.Position.Coordinates);
             Assert.Equal(expectedPosition.Coordinates.X, mower.Position.Coordinates.X);

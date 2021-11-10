@@ -9,9 +9,22 @@ namespace MowerEngine.Models
     public class Mower
     {
 
+
+        public Mower()
+        {
+
+        }
+        
+        public Mower(Lawn lawn)
+        {
+            this.Lawn = lawn;
+        }
+
         private Guid _mowerId = Guid.NewGuid();
 
         public Guid MowerId { get => _mowerId; }
+
+        public Lawn Lawn { get; set; }
 
         [Required]
         [JsonPropertyName("startposition")]
@@ -20,11 +33,11 @@ namespace MowerEngine.Models
         [Required]
         public List<MowerAction> Route { get; set; }
 
-        public Mower Run (Lawn lawn)
+        public Mower Run ()
         {
             foreach (var action in this.Route)
             {
-                ApplyAction(lawn,action);
+                ApplyAction(Lawn,action);
             }
             return this;
         }
