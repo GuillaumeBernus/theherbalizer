@@ -24,4 +24,9 @@
     <ProjectReference Include="..\MowerEngine\MowerEngine.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Lawn\" />
+    <Folder Include="MowerEngine\" />
+  </ItemGroup>
+
 </Project>
