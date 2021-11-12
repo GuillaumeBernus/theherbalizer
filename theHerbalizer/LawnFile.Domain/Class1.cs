@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LawnFile.Domain
+﻿namespace LawnFile.Domain
 {
     public class Class1
     {

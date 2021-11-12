@@ -2,15 +2,15 @@
 
 namespace LawnFile.Domain.Extensions
 {
-    static class StringExtensions
+    internal static class StringExtensions
     {
-
         public static bool IsLawnDescription(this string line)
         {
             Regex regex = new Regex(@"^\d+ \d+$", RegexOptions.None);
 
             return regex.IsMatch(line);
         }
+
         public static bool IsMowerDescription(this string line)
         {
             Regex regex = new Regex(@"^\d+ \d+ (N|E|S|W)$", RegexOptions.None);

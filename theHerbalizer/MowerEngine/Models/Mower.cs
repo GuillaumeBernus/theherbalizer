@@ -1,18 +1,16 @@
 ﻿using MowerEngine.Models.MoveHandler;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace MowerEngine.Models
 {
-
     public class Mower
     {
         public Mower()
         {
-
         }
+
         public Mower(Lawn lawn)
         {
             this.Lawn = lawn;
@@ -22,7 +20,7 @@ namespace MowerEngine.Models
 
         public Guid MowerId { get => _mowerId; }
 
-        public Lawn Lawn { get;  set; }
+        public Lawn Lawn { get; set; }
 
         [Required]
         [JsonPropertyName("startposition")]
@@ -31,19 +29,16 @@ namespace MowerEngine.Models
         [Required]
         public string Route { get; set; }
 
-
-        public Mower Run ()
+        public Mower Run()
         {
             var moves = TravelParser.Parse(Route);
 
-            foreach(var move in moves)
+            foreach (var move in moves)
             {
                 MoveHandlerFactory.GetMoveHandler(move).MoveMower(this, move);
             }
-          
+
             return this;
         }
-
-
     }
 }

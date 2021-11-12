@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace MowerEngine.Models.MoveHandler
 {
@@ -10,6 +9,7 @@ namespace MowerEngine.Models.MoveHandler
             { MoveType.FrontMove, new MoveHandlerFrontMove() },
             { MoveType.Rotation, new MoveHandlerRotation() }
         };
+
         public static MoveHandlerBase GetMoveHandler(Move move) => handlers[move.Type];
     }
 }

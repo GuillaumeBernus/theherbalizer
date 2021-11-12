@@ -1,12 +1,7 @@
-﻿using MowerEngine.Exceptions;
-using MowerEngine.Models;
+﻿using MowerEngine.Models;
 using MowerEngine.Models.Exceptions;
 using MowerEngine.Models.MoveHandler;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace MowerEngine.Tests.Unit
@@ -14,6 +9,7 @@ namespace MowerEngine.Tests.Unit
     public class MoveHandlerRotationTests
     {
         private readonly MoveHandlerRotation handler;
+
         public MoveHandlerRotationTests()
         {
             handler = new MoveHandlerRotation();
@@ -29,10 +25,9 @@ namespace MowerEngine.Tests.Unit
             var lawn = new Lawn(new List<Mower> { mower });
             lawn.UpperRigthCorner = Tools.GetPoint(5, 5);
 
-
             Assert.Throws<WrongMoveTypeException>(() => handler.MoveMower(mower, move));
-
         }
+
         [Fact]
         public void RunTestsApplyMowerMove_WhenMowerIsNull_ThrowsInvalidMowerException()
         {
@@ -41,25 +36,19 @@ namespace MowerEngine.Tests.Unit
             Assert.Throws<InvalidMowerException>(() => handler.MoveMower(null, move));
         }
 
-
-
         [Fact]
         public void RunTestsApplyMowerMove_WhenMoveIsNull_ThrowsNullMoveException()
         {
-            
             var mower = Tools.GetMower(0, 0, Direction.N, "", null);
 
             var lawn = new Lawn(new List<Mower> { mower });
             lawn.UpperRigthCorner = Tools.GetPoint(5, 5);
 
-
             Assert.Throws<NullMoveException>(() => handler.MoveMower(mower, null));
-
         }
 
-
         [Theory]
-        [InlineData(1,Direction.E)]
+        [InlineData(1, Direction.E)]
         [InlineData(-1, Direction.W)]
         [InlineData(4, Direction.N)]
         [InlineData(-7, Direction.E)]
@@ -73,6 +62,5 @@ namespace MowerEngine.Tests.Unit
 
             Assert.Equal(mower.Position, expected);
         }
-
     }
 }

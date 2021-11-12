@@ -5,10 +5,8 @@ namespace MowerEngine.Models
 {
     public static class MoveParser
     {
-
         public static Move Parse(string stringMove)
         {
-
             var move = new Move();
             if (stringMove.IsRotationDescription())
             {

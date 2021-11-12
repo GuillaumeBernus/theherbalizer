@@ -11,6 +11,7 @@ namespace LawnFile.Domain.Model
 
         //public IEnumerable<MowerAction> Route { get; set; }
         public string Route { get; set; }
+
         internal static List<Mower> FromMowerDescriptionList(IEnumerable<MowerDescription> mowerDescriptions)
         {
             return mowerDescriptions.Select(FromMowerDescription).ToList();
@@ -18,8 +19,7 @@ namespace LawnFile.Domain.Model
 
         private static Mower FromMowerDescription(MowerDescription mowerDescription)
         {
-
-            if(!MowerPosition.TryParse(mowerDescription.StartPosition,out MowerPosition startPosition))
+            if (!MowerPosition.TryParse(mowerDescription.StartPosition, out MowerPosition startPosition))
             {
                 throw new Exception("Wrong mower start position description");
             }
@@ -29,7 +29,7 @@ namespace LawnFile.Domain.Model
             //    throw new Exception("Wrong route description");
             //}
 
-            if(!mowerDescription.Route.IsMowerRoute())
+            if (!mowerDescription.Route.IsMowerRoute())
             {
                 throw new Exception("Wrong route description");
             }
@@ -41,19 +41,15 @@ namespace LawnFile.Domain.Model
             };
         }
 
-
-
-            private static bool TryParseRoute(string routeDescription, out IEnumerable<MowerAction> route)
+        private static bool TryParseRoute(string routeDescription, out IEnumerable<MowerAction> route)
         {
             var actionDescriptions = routeDescription.ToCharArray();
 
-            
-            
-            var actionList= new List<MowerAction>(actionDescriptions.Length);
+            var actionList = new List<MowerAction>(actionDescriptions.Length);
 
             foreach (var item in actionDescriptions)
             {
-                if(!Enum.TryParse<MowerAction>(item.ToString(), out MowerAction action))
+                if (!Enum.TryParse<MowerAction>(item.ToString(), out MowerAction action))
                 {
                     route = null;
                     return false;

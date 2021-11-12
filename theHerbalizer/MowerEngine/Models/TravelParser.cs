@@ -3,22 +3,19 @@ using System.Collections.Generic;
 
 namespace MowerEngine.Models
 {
-
     public static class TravelParser
     {
         public static List<Move> Parse(string routeDescription)
         {
-            
             var stringMoves = SplitRoute(routeDescription);
             var travel = new List<Move>();
             stringMoves.ForEach(m => travel.Add(MoveParser.Parse(m)));
             return travel;
         }
 
-
         private static List<string> SplitRoute(string stringRoute)
         {
-            var result =new List<string>();
+            var result = new List<string>();
             if (string.IsNullOrWhiteSpace(stringRoute) || !stringRoute.IsTravelDescription())
             {
                 throw new InvalidRouteDescriptionException();
@@ -31,12 +28,12 @@ namespace MowerEngine.Models
                 { true, new char[] { Constants.RightRotationCharacter, Constants.LeftRotationCharacter } }
                 };
 
-            var isCurrentMoveAFrontMove = stringRoute[0]== Constants.FrontMoveCharacter;
+            var isCurrentMoveAFrontMove = stringRoute[0] == Constants.FrontMoveCharacter;
 
             while ((index = stringRoute.IndexOfAny(delimitors[isCurrentMoveAFrontMove], start)) != -1)
             {
                 if (index - start > 0)
-                     result.Add( stringRoute.Substring(start, index - start));
+                    result.Add(stringRoute.Substring(start, index - start));
                 else
                     result.Add(stringRoute.Substring(index, 1));
                 start = index;
@@ -49,7 +46,5 @@ namespace MowerEngine.Models
             }
             return result;
         }
-       
-
     }
 }

@@ -2,7 +2,7 @@
 
 namespace LawnFile.Domain.Model
 {
-    class LawnDescription
+    internal class LawnDescription
     {
         public string UpperRightCorner { get; set; }
 

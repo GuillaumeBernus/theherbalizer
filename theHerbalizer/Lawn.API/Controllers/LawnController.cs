@@ -2,15 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MowerEngine.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Lawn.API.Controllers
 {
     /// <summary>
-    /// Controller that handles the lawn 
+    /// Controller that handles the lawn
     /// </summary>
     [ApiController]
     [Route("[controller]")]
@@ -24,7 +21,7 @@ namespace Lawn.API.Controllers
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="lawn">a lawn description</param>
         /// <returns>the position of the different mowers of the lawn</returns>
@@ -32,7 +29,6 @@ namespace Lawn.API.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-       
         public ActionResult<List<MowerPosition>> Post([FromBody] MowerEngine.Models.Lawn lawn)
         {
             return Ok(lawn.RunMowers());

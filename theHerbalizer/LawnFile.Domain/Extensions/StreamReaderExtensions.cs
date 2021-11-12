@@ -1,16 +1,12 @@
 ﻿using LawnFile.Domain.Model;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LawnFile.Domain.Extensions
 {
-    static class StreamReaderExtensions
+    internal static class StreamReaderExtensions
     {
-
         public static async Task<MowerDescription> ExtractMowerDescriptionAsync(this StreamReader sr)
         {
             var mowerDescription = new MowerDescription();

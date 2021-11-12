@@ -1,11 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MowerEngine.Models
 {
     public record MowerPosition
     {
-
         [Required]
         public Point Coordinates { get; set; }
         [Required]
@@ -15,8 +13,5 @@ namespace MowerEngine.Models
         //{
         //    return $"{Coordinates?.ToString() ?? String.Empty} {Orientation}";
         //}
-
     }
 }
-
-

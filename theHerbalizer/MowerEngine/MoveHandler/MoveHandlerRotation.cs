@@ -4,7 +4,6 @@ namespace MowerEngine.Models.MoveHandler
 {
     public class MoveHandlerRotation : MoveHandlerBase
     {
-
         private const int DirectionCount = 4;
 
         public override void ApplyMowerMoveInternal(Mower mower, Move move)
@@ -15,8 +14,8 @@ namespace MowerEngine.Models.MoveHandler
                 direction += DirectionCount;
             }
             mower.Position.Orientation = (Direction)direction;
-
         }
+
         public override void Check(Mower mower, Move move)
         {
             base.Check(mower, move);
@@ -24,7 +23,6 @@ namespace MowerEngine.Models.MoveHandler
             {
                 throw new WrongMoveTypeException();
             }
-
         }
     }
 }

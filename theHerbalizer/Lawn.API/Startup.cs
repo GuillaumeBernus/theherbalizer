@@ -20,12 +20,11 @@ namespace Lawn.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers().AddJsonOptions(opts =>
             {
                 var enumConverter = new JsonStringEnumConverter();
                 opts.JsonSerializerOptions.Converters.Add(enumConverter);
-                opts.JsonSerializerOptions.PropertyNameCaseInsensitive=true;
+                opts.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
             });
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddSwaggerGen(c =>
@@ -45,10 +44,10 @@ namespace Lawn.API
             {
                 app.UseExceptionHandler("/error");
             }
-            
+
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Lawn.API v1"));
-            
+
             app.UseHttpsRedirection();
 
             app.UseRouting();

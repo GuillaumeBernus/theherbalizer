@@ -21,14 +21,13 @@ namespace LawnFile.Domain.Model
 
             var pointDescription = $"{members[0]} {members[1]}";
 
-
             if (!Point.TryParse(pointDescription, out Point position)
                 || !Enum.TryParse<Direction>(members[2], out Direction orientation))
             {
                 return false;
             }
 
-            mowerPosition= new MowerPosition
+            mowerPosition = new MowerPosition
             {
                 Coordinates = position,
                 Orientation = orientation

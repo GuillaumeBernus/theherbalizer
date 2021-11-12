@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+
 namespace MowerEngine.Models
 {
     public static class StringExtensions
@@ -19,7 +20,7 @@ namespace MowerEngine.Models
         public static bool IsTravelDescription(this string stringMove)
         {
             char[] allowed = { Constants.LeftRotationCharacter, Constants.RightRotationCharacter, Constants.FrontMoveCharacter };
-            return !String.IsNullOrEmpty(stringMove) && !stringMove.Any(c=>!allowed.Contains(c));
+            return !String.IsNullOrEmpty(stringMove) && !stringMove.Any(c => !allowed.Contains(c));
         }
     }
 }
