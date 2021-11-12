@@ -3,6 +3,7 @@ using LawnFile.Domain.Interface;
 using LawnFile.Domain.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -36,17 +37,28 @@ namespace LawnFile.Domain.Handler
         /// <exception cref="System.Exception">Wrong mower description</exception>
         public async Task<Stream > HandleAsync(string filePath)
         {
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
             var lawnDescription = await GetLawnDescriptionAsync(filePath).ConfigureAwait(false);
-
+            sw.Stop();
+            long ms1 = sw.ElapsedMilliseconds;
+            sw.Restart();
             var lawn = Lawn.FromLawnDescription(lawnDescription);
-
+            sw.Stop();
+            long ms2 = sw.ElapsedMilliseconds;
+            sw.Restart();
 
             var mowerPositions = await _lawnAPIClient.TreatLawnDescriptionAsync(lawn).ConfigureAwait(false);
+            sw.Stop();
+            long ms3 = sw.ElapsedMilliseconds;
+            sw.Restart();
 
+            var res = await TreatPositions(mowerPositions).ConfigureAwait(false);
+            sw.Stop();
+            long ms4 = sw.ElapsedMilliseconds;
 
-
-
-            return await TreatPositions(mowerPositions).ConfigureAwait(false);
+            return res ;
         }
 
         private static async Task<Stream> TreatPositions(List<MowerPosition> mowerPositions)
@@ -68,6 +80,7 @@ namespace LawnFile.Domain.Handler
 
         private async Task<LawnDescription> GetLawnDescriptionAsync(string filePath)
         {
+            
             using StreamReader srIn = new StreamReader(filePath, true);
 
             if (srIn.EndOfStream)
@@ -81,12 +94,32 @@ namespace LawnFile.Domain.Handler
             {
                 throw new Exception("First Line is not a lawn description");
             }
+            Stopwatch sw0 = new Stopwatch();
+            sw0.Start();
+            string mowers = await srIn.ReadToEndAsync().ConfigureAwait(false);
 
-            var mowerDescriptions = new List<MowerDescription>();
-            while (!srIn.EndOfStream)
+            var mowerDescriptions = ExtractMowerDescriptions(mowers);
+           
+            sw0.Stop();
+            long ms = sw0.ElapsedMilliseconds;
+            return new LawnDescription
             {
-                var mowerDescription = await srIn.ExtractMowerDescriptionAsync().ConfigureAwait(false);
-
+                UpperRightCorner = lawnSize,
+                MowerDescriptions = mowerDescriptions
+            };
+        }
+        public static  List<MowerDescription> ExtractMowerDescriptions(string source)
+        {
+            var lines = source.Split("\r\n");
+            var count = lines.Length;
+            var mowerDescriptions = new List<MowerDescription>(count>1? count / 2:1);
+            for (int i = 0; i < count-1; i+=2)
+            {
+                var mowerDescription = new MowerDescription
+                {
+                    StartPosition = lines[i],
+                    Route = lines[i + 1]
+                };
                 if (!mowerDescription.Check())
                 {
                     throw new Exception("Wrong mower description");
@@ -94,11 +127,7 @@ namespace LawnFile.Domain.Handler
                 mowerDescriptions.Add(mowerDescription);
             }
 
-            return new LawnDescription
-            {
-                UpperRightCorner = lawnSize,
-                MowerDescriptions = mowerDescriptions
-            };
+            return mowerDescriptions;
         }
 
 

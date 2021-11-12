@@ -12,6 +12,8 @@ namespace MowerEngine.Models.MoveHandler
             ApplyMowerMoveInternal(mower, move);
         }
 
+        public abstract MowerPosition ApplyMove(MowerPosition start, Lawn lawn, Move move);
+
         public virtual void Check(Mower mower, Move move)
         {
             if (mower == null)

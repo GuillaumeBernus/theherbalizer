@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+using System.Linq;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace MowerEngine.Models
 {
@@ -17,21 +20,32 @@ namespace MowerEngine.Models
         }
 
         [JsonConstructor()]
-        public Lawn(List<Mower> mowers) : base()
+        public Lawn(List<Mower> mowers, Point upperRigthCorner) : base()
         {
-            mowers.ForEach(m => m.Lawn = this);
+            this.UpperRigthCorner = upperRigthCorner;
+            Parallel.ForEach(mowers, m => m.Lawn = this);
             this.Mowers = mowers;
         }
 
         public List<MowerPosition> RunMowers()
         {
             var result = new List<MowerPosition>(Mowers.Count);
-
-            foreach (var mower in Mowers)
+            Stopwatch sw = new Stopwatch();
+            try
             {
-                result.Add(mower.Run().Position);
-            }
+                sw.Start();
 
+                Parallel.ForEach(Mowers.AsParallel().AsOrdered(), mower =>
+                {
+                    result.Add(mower.Destination);
+                });
+                sw.Stop();
+                long ms2 = sw.ElapsedMilliseconds;
+            }
+            catch (System.Exception e)
+            {
+                throw;
+            }
             return result;
         }
     }

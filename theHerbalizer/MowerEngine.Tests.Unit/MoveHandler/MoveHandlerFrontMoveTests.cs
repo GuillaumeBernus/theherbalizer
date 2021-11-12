@@ -41,8 +41,7 @@ namespace MowerEngine.Tests.Unit
 
             var mower = Tools.GetMower(0, 0, Direction.N, "", null);
 
-            var lawn = new Lawn(new List<Mower> { mower });
-            lawn.UpperRigthCorner = Tools.GetPoint(5, 5);
+            var lawn = new Lawn(new List<Mower> { mower }, Tools.GetPoint(5, 5));
 
             Assert.Throws<WrongMoveTypeException>(() => handler.MoveMower(mower, move));
         }
@@ -54,8 +53,7 @@ namespace MowerEngine.Tests.Unit
 
             var mower = Tools.GetMower(0, 0, Direction.N, "", null);
 
-            var lawn = new Lawn(new List<Mower> { mower });
-            lawn.UpperRigthCorner = Tools.GetPoint(5, 5);
+            var lawn = new Lawn(new List<Mower> { mower },Tools.GetPoint(5, 5));
 
             Assert.Throws<InvalidValueForFrontMoveException>(() => handler.MoveMower(mower, move));
         }
@@ -65,8 +63,7 @@ namespace MowerEngine.Tests.Unit
         {
             var mower = Tools.GetMower(0, 0, Direction.N, "", null);
 
-            var lawn = new Lawn(new List<Mower> { mower });
-            lawn.UpperRigthCorner = Tools.GetPoint(5, 5);
+            var lawn = new Lawn(new List<Mower> { mower }, Tools.GetPoint(5, 5));
 
             Assert.Throws<NullMoveException>(() => handler.MoveMower(mower, null));
         }
@@ -89,8 +86,7 @@ namespace MowerEngine.Tests.Unit
 
             var mower = Tools.GetMower(X: initialX, Y: initialY, Orientation: orientation, "", null);
 
-            var lawn = new Lawn(new List<Mower> { mower });
-            lawn.UpperRigthCorner = Tools.GetPoint(5, 5);
+            var lawn = new Lawn(new List<Mower> { mower }, Tools.GetPoint(5, 5));
 
             handler.MoveMower(mower, move);
 

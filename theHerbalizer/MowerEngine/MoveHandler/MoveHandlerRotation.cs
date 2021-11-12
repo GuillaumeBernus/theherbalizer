@@ -15,7 +15,17 @@ namespace MowerEngine.Models.MoveHandler
             }
             mower.Position.Orientation = (Direction)direction;
         }
-
+        public override MowerPosition ApplyMove(MowerPosition start, Lawn lawn, Move move)
+        {
+            int direction = ((int)start.Orientation + move.Value) % DirectionCount;
+            if (direction < 0)
+            {
+                direction += DirectionCount;
+            }
+            var finish = start with { Orientation= (Direction)direction };
+            return finish;
+        }
+        
         public override void Check(Mower mower, Move move)
         {
             base.Check(mower, move);
