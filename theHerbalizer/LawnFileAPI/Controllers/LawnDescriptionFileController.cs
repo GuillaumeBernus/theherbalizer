@@ -100,6 +100,7 @@ namespace LawnFile.API.Controllers
         /// <returns>A Task&lt;System.String&gt; representing the asynchronous operation.</returns>
         private async Task<string> CopyFileAsync(IFormFile formFile)
         {
+            
             var filePath = Path.Combine(_fileTreatmentConfiguration.TemporaryFileDirectoryPath,
                 Path.GetRandomFileName());
 

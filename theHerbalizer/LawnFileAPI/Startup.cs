@@ -19,7 +19,7 @@ namespace LawnFile.API
     public class Startup
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Startup"/> class.
+        /// Initializes a new instance of the <see cref="Startup" /> class.
         /// </summary>
         /// <param name="configuration">The configuration.</param>
         /// <exception cref="System.ArgumentNullException">configuration</exception>
