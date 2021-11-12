@@ -9,9 +9,5 @@ namespace MowerEngine.Models
         [Required]
         public Direction Orientation { get; set; }
 
-        //public override string ToString()
-        //{
-        //    return $"{Coordinates?.ToString() ?? String.Empty} {Orientation}";
-        //}
     }
 }
