@@ -42,10 +42,10 @@ namespace LawnFile.API.Controllers
             {
                 return BadRequest();
             }
-            string filePath = await CopyFile(formFile).ConfigureAwait(false);
+            string filePath = await CopyFileAsync(formFile).ConfigureAwait(false);
             try
             {
-                var lawn = await _lawnFileHandler.HandleAsync(filePath);
+                var lawn = await _lawnFileHandler.HandleAsync(filePath).ConfigureAwait(false);
                 return Ok(lawn);
             }
             finally
@@ -54,14 +54,14 @@ namespace LawnFile.API.Controllers
             }
         }
 
-        private async Task<string> CopyFile(IFormFile formFile)
+        private async Task<string> CopyFileAsync(IFormFile formFile)
         {
             var filePath = Path.Combine(_fileTreatmentConfiguration.TemporaryFileDirectoryPath,
                 Path.GetRandomFileName());
 
             using (var stream = System.IO.File.Create(filePath))
             {
-                await formFile.CopyToAsync(stream);
+                await formFile.CopyToAsync(stream).ConfigureAwait(false);
             }
 
             return filePath;
