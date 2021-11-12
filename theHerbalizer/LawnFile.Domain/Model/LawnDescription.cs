@@ -5,7 +5,7 @@ namespace LawnFile.Domain.Model
     /// <summary>
     /// Class LawnDescription.
     /// </summary>
-    internal class LawnDescription
+    public class LawnDescription
     {
         /// <summary>
         /// Gets or sets the upper right corner.

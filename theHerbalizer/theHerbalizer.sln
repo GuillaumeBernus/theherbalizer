@@ -21,11 +21,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lawn.API", "Lawn.API\Lawn.A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "theHerbalizerGateway", "theHerbalizerGateway", "{49543D8F-464E-437F-9BF5-DC46A56FA674}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "theHerbalizerGateway", "theHerbalizerGateway\theHerbalizerGateway.csproj", "{4F276B65-CA3E-4610-B867-11DDE7E08971}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "theHerbalizerGateway", "theHerbalizerGateway\theHerbalizerGateway.csproj", "{4F276B65-CA3E-4610-B867-11DDE7E08971}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit", "Unit", "{62EF12B2-6C6F-4778-A9B7-BF400D54E26A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MowerEngine.Tests.Unit", "MowerEngine.Tests.Unit\MowerEngine.Tests.Unit.csproj", "{3D4C3B75-F4A8-4A22-948C-6BE414830717}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MowerEngine.Tests.Unit", "MowerEngine.Tests.Unit\MowerEngine.Tests.Unit.csproj", "{3D4C3B75-F4A8-4A22-948C-6BE414830717}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LawnFile.Infrastructure", "LawnFile.Infrastructure\LawnFile.Infrastructure.csproj", "{4DF392F5-0634-4598-897B-907DF51049E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{3D4C3B75-F4A8-4A22-948C-6BE414830717}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D4C3B75-F4A8-4A22-948C-6BE414830717}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D4C3B75-F4A8-4A22-948C-6BE414830717}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DF392F5-0634-4598-897B-907DF51049E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DF392F5-0634-4598-897B-907DF51049E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DF392F5-0634-4598-897B-907DF51049E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DF392F5-0634-4598-897B-907DF51049E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +78,7 @@ Global
 		{4F276B65-CA3E-4610-B867-11DDE7E08971} = {49543D8F-464E-437F-9BF5-DC46A56FA674}
 		{62EF12B2-6C6F-4778-A9B7-BF400D54E26A} = {302D0A01-5253-41F1-8303-11B2A2A3D971}
 		{3D4C3B75-F4A8-4A22-948C-6BE414830717} = {62EF12B2-6C6F-4778-A9B7-BF400D54E26A}
+		{4DF392F5-0634-4598-897B-907DF51049E6} = {C8A2948D-D02D-42B4-8FE4-C8CE8D098944}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3CF973BF-CEE3-4F29-86D9-10B8A10348B5}

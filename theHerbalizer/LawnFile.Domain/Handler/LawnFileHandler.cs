@@ -15,11 +15,15 @@ namespace LawnFile.Domain.Handler
     /// <seealso cref="LawnFile.Domain.Interface.ILawnFileHandler" />
     public class LawnFileHandler : ILawnFileHandler
     {
+
+        private readonly ILawnApiClient _lawnAPIClient;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="LawnFileHandler" /> class.
         /// </summary>
-        public LawnFileHandler()
+        public LawnFileHandler(ILawnApiClient lawnAPIClient)
         {
+            _lawnAPIClient = lawnAPIClient ?? throw new ArgumentNullException(nameof(lawnAPIClient)); ;
         }
 
         /// <summary>
@@ -30,7 +34,39 @@ namespace LawnFile.Domain.Handler
         /// <exception cref="System.Exception">Empty file</exception>
         /// <exception cref="System.Exception">First Line is not a lawn description</exception>
         /// <exception cref="System.Exception">Wrong mower description</exception>
-        public async Task<Lawn> HandleAsync(string filePath)
+        public async Task<Stream > HandleAsync(string filePath)
+        {
+            var lawnDescription = await GetLawnDescriptionAsync(filePath).ConfigureAwait(false);
+
+            var lawn = Lawn.FromLawnDescription(lawnDescription);
+
+
+            var mowerPositions = await _lawnAPIClient.TreatLawnDescriptionAsync(lawn).ConfigureAwait(false);
+
+
+
+
+            return await TreatPositions(mowerPositions).ConfigureAwait(false);
+        }
+
+        private static async Task<Stream> TreatPositions(List<MowerPosition> mowerPositions)
+        {
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
+
+            foreach (var position in mowerPositions)
+            {
+                await writer.WriteLineAsync(position.ToString()).ConfigureAwait(false);
+            }
+
+            await writer.FlushAsync().ConfigureAwait(false);
+            stream.Position = 0;
+            return stream;
+        }
+
+
+
+        private async Task<LawnDescription> GetLawnDescriptionAsync(string filePath)
         {
             using StreamReader srIn = new StreamReader(filePath, true);
 
@@ -58,13 +94,14 @@ namespace LawnFile.Domain.Handler
                 mowerDescriptions.Add(mowerDescription);
             }
 
-            var lawnDescription = new LawnDescription
+            return new LawnDescription
             {
                 UpperRightCorner = lawnSize,
                 MowerDescriptions = mowerDescriptions
             };
-
-            return Lawn.FromLawnDescription(lawnDescription);
         }
+
+
+
     }
 }

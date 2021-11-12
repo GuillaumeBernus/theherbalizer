@@ -1,20 +1,25 @@
-﻿namespace LawnFile.Domain.Model
+﻿using System.Text.Json.Serialization;
+
+namespace LawnFile.Domain.Model
 {
     /// <summary>
     /// Class Point.
     /// </summary>
     public class Point
     {
+
         /// <summary>
         /// Gets or sets the x.
         /// </summary>
         /// <value>The x.</value>
+        [JsonPropertyName("x")]
         public int X { get; set; }
 
         /// <summary>
         /// Gets or sets the y.
         /// </summary>
         /// <value>The y.</value>
+        [JsonPropertyName("y")]
         public int Y { get; set; }
 
 
