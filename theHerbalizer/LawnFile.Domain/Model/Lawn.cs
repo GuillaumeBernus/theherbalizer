@@ -28,7 +28,7 @@ namespace LawnFile.Domain.Model
             return new Lawn
             {
                 UpperRigthCorner = PointParser.Parse(lawnDescription.UpperRightCorner),
-                Mowers = Mower.FromMowerDescriptionList(lawnDescription.MowerDescriptions)
+                Mowers = MowerParser.FromMowerDescriptionList(lawnDescription.MowerDescriptions)
             };
         }
     }
