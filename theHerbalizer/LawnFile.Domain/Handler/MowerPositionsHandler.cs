@@ -25,7 +25,12 @@ namespace LawnFile.Domain.Handler
         {
             var stream = new MemoryStream();
             var writer = new StreamWriter(stream);
-            positions.ForEach(async(p) => await writer.WriteLineAsync(p.ToString()).ConfigureAwait(false));
+
+            foreach (var position in positions)
+            {
+                await writer.WriteLineAsync(position.ToString()).ConfigureAwait(false);
+            }
+
             await writer.FlushAsync().ConfigureAwait(false);
             stream.Position = 0;
             return stream;
