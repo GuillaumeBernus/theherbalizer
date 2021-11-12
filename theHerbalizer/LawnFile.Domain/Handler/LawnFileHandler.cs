@@ -20,8 +20,7 @@ namespace LawnFile.Domain.Handler
         public async Task<Lawn> HandleAsync(string filePath)
         {
 
-
-
+            
             using StreamReader srIn = new StreamReader(filePath, true);
 
             if(srIn.EndOfStream)
@@ -41,7 +40,7 @@ namespace LawnFile.Domain.Handler
             var mowerDescriptions = new List<MowerDescription>();
             while (!srIn.EndOfStream)
             {
-                var mowerDescription = await srIn.ExtractMowerDescriptionAsync();
+                var mowerDescription = await srIn.ExtractMowerDescriptionAsync().ConfigureAwait(false);
 
 
                 if(!mowerDescription.Check())

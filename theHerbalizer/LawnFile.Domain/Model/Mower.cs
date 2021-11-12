@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LawnFile.Domain.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,8 +9,8 @@ namespace LawnFile.Domain.Model
     {
         public MowerPosition StartPosition { get; set; }
 
-        public IEnumerable<MowerAction> Route { get; set; }
-
+        //public IEnumerable<MowerAction> Route { get; set; }
+        public string Route { get; set; }
         internal static List<Mower> FromMowerDescriptionList(IEnumerable<MowerDescription> mowerDescriptions)
         {
             return mowerDescriptions.Select(FromMowerDescription).ToList();
@@ -23,7 +24,12 @@ namespace LawnFile.Domain.Model
                 throw new Exception("Wrong mower start position description");
             }
 
-            if (!TryParseRoute(mowerDescription.Route, out IEnumerable<MowerAction> route))
+            //if (!TryParseRoute(mowerDescription.Route, out IEnumerable<MowerAction> route))
+            //{
+            //    throw new Exception("Wrong route description");
+            //}
+
+            if(!mowerDescription.Route.IsMowerRoute())
             {
                 throw new Exception("Wrong route description");
             }
@@ -31,11 +37,13 @@ namespace LawnFile.Domain.Model
             return new Mower
             {
                 StartPosition = startPosition,
-                Route = route
+                Route = mowerDescription.Route//route
             };
         }
 
-        private static bool TryParseRoute(string routeDescription, out IEnumerable<MowerAction> route)
+
+
+            private static bool TryParseRoute(string routeDescription, out IEnumerable<MowerAction> route)
         {
             var actionDescriptions = routeDescription.ToCharArray();
 

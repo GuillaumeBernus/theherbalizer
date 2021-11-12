@@ -12,5 +12,6 @@ namespace LawnFile.API.Configuration
 
 
         public int MaxSizeOctets { get; set; }
+
     }
 }

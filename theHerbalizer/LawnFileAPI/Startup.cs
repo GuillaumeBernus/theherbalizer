@@ -42,6 +42,7 @@ namespace LawnFile.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "LawnFile.API", Version = "v1" });
             });
             services.Configure<InputFileConfiguration>(_configuration.GetSection("InputFile"));
+            services.Configure<FileTreatmentConfiguration>(_configuration.GetSection("FileTreatment"));
             services.AddSingleton<ILawnFileHandler, LawnFileHandler>();
         }
 
