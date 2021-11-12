@@ -2,37 +2,31 @@
 
 namespace LawnFile.Domain.Model
 {
-    public class MowerPosition
+    /// <summary>
+    /// Class MowerPosition.
+    /// </summary>
+    public record MowerPosition
     {
+        /// <summary>
+        /// Gets or sets the coordinates.
+        /// </summary>
+        /// <value>The coordinates.</value>
         public Point Coordinates { get; set; }
 
+        /// <summary>
+        /// Gets or sets the orientation.
+        /// </summary>
+        /// <value>The orientation.</value>
         public Direction Orientation { get; set; }
-
-        internal static bool TryParse(string startPosition, out MowerPosition mowerPosition)
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        public override string ToString()
         {
-            mowerPosition = null;
-
-            var members = startPosition.Split(" ");
-
-            if (members.Length != 3)
-            {
-                return false;
-            }
-
-            var pointDescription = $"{members[0]} {members[1]}";
-
-            if (!Point.TryParse(pointDescription, out Point position)
-                || !Enum.TryParse<Direction>(members[2], out Direction orientation))
-            {
-                return false;
-            }
-
-            mowerPosition = new MowerPosition
-            {
-                Coordinates = position,
-                Orientation = orientation
-            };
-            return true;
+            return $"{Coordinates?.ToString() ?? String.Empty} {Orientation}";
         }
+
+
     }
 }

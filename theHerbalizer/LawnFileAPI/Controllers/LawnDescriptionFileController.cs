@@ -12,16 +12,44 @@ using System.Threading.Tasks;
 
 namespace LawnFile.API.Controllers
 {
+    /// <summary>
+    /// Class LawnDescriptionFileController.
+    /// Implements the <see cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
     [ApiController]
     [Route("[controller]")]
     public class LawnDescriptionFileController : ControllerBase
     {
+        /// <summary>
+        /// The logger
+        /// </summary>
         private readonly ILogger<LawnDescriptionFileController> _logger;
 
+        /// <summary>
+        /// The input file configuration
+        /// </summary>
         private readonly InputFileConfiguration _inputFileConfiguration;
+        /// <summary>
+        /// The file treatment configuration
+        /// </summary>
         private readonly FileTreatmentConfiguration _fileTreatmentConfiguration;
+        /// <summary>
+        /// The lawn file handler
+        /// </summary>
         private readonly ILawnFileHandler _lawnFileHandler;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LawnDescriptionFileController" /> class.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        /// <param name="inputFileConfiguration">The input file configuration.</param>
+        /// <param name="fileTreatmentConfiguration">The file treatment configuration.</param>
+        /// <param name="lawnFileHandler">The lawn file handler.</param>
+        /// <exception cref="System.ArgumentNullException">logger</exception>
+        /// <exception cref="System.ArgumentNullException">inputFileConfiguration</exception>
+        /// <exception cref="System.ArgumentNullException">fileTreatmentConfiguration</exception>
+        /// <exception cref="System.ArgumentNullException">lawnFileHandler</exception>
         public LawnDescriptionFileController(ILogger<LawnDescriptionFileController> logger, IOptions<InputFileConfiguration> inputFileConfiguration
            , IOptions<FileTreatmentConfiguration> fileTreatmentConfiguration
             , ILawnFileHandler lawnFileHandler)
@@ -32,8 +60,13 @@ namespace LawnFile.API.Controllers
             _lawnFileHandler = lawnFileHandler ?? throw new ArgumentNullException(nameof(lawnFileHandler));
         }
 
+        /// <summary>
+        /// Post as an asynchronous operation.
+        /// </summary>
+        /// <param name="formFile">The form file.</param>
+        /// <returns>A Task&lt;ActionResult`1&gt; representing the asynchronous operation.</returns>
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Lawn>> PostAsync(IFormFile formFile)
@@ -42,10 +75,10 @@ namespace LawnFile.API.Controllers
             {
                 return BadRequest();
             }
-            string filePath = await CopyFile(formFile).ConfigureAwait(false);
+            string filePath = await CopyFileAsync(formFile).ConfigureAwait(false);
             try
             {
-                var lawn = await _lawnFileHandler.HandleAsync(filePath);
+                var lawn = await _lawnFileHandler.HandleAsync(filePath).ConfigureAwait(false);
                 return Ok(lawn);
             }
             finally
@@ -54,19 +87,29 @@ namespace LawnFile.API.Controllers
             }
         }
 
-        private async Task<string> CopyFile(IFormFile formFile)
+        /// <summary>
+        /// Copy file as an asynchronous operation.
+        /// </summary>
+        /// <param name="formFile">The form file.</param>
+        /// <returns>A Task&lt;System.String&gt; representing the asynchronous operation.</returns>
+        private async Task<string> CopyFileAsync(IFormFile formFile)
         {
             var filePath = Path.Combine(_fileTreatmentConfiguration.TemporaryFileDirectoryPath,
                 Path.GetRandomFileName());
 
             using (var stream = System.IO.File.Create(filePath))
             {
-                await formFile.CopyToAsync(stream);
+                await formFile.CopyToAsync(stream).ConfigureAwait(false);
             }
 
             return filePath;
         }
 
+        /// <summary>
+        /// Checks the file.
+        /// </summary>
+        /// <param name="formFile">The form file.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         private bool CheckFile(IFormFile formFile)
         {
             if (formFile.Length <= 0)
