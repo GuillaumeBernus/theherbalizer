@@ -87,6 +87,7 @@ namespace LawnFile.API.Controllers
                 };
                 
             }
+
             finally
             {
                 System.IO.File.Delete(filePath);
