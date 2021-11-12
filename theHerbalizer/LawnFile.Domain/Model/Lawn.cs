@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LawnFile.Domain.Model
 {
@@ -12,11 +9,10 @@ namespace LawnFile.Domain.Model
 
         internal static Lawn FromLawnDescription(LawnDescription lawnDescription)
         {
-
             return new Lawn
             {
-                UpperRigthCorner=Point.FromPointDescription(lawnDescription.UpperRightCorner),
-                Mowers=Mower.FromMowerDescriptionList(lawnDescription.MowerDescriptions)
+                UpperRigthCorner = Point.FromPointDescription(lawnDescription.UpperRightCorner),
+                Mowers = Mower.FromMowerDescriptionList(lawnDescription.MowerDescriptions)
             };
         }
     }

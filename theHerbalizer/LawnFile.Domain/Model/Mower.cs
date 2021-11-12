@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LawnFile.Domain.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,7 +9,8 @@ namespace LawnFile.Domain.Model
     {
         public MowerPosition StartPosition { get; set; }
 
-        public IEnumerable<MowerAction> Route { get; set; }
+        //public IEnumerable<MowerAction> Route { get; set; }
+        public string Route { get; set; }
 
         internal static List<Mower> FromMowerDescriptionList(IEnumerable<MowerDescription> mowerDescriptions)
         {
@@ -17,13 +19,17 @@ namespace LawnFile.Domain.Model
 
         private static Mower FromMowerDescription(MowerDescription mowerDescription)
         {
-
-            if(!MowerPosition.TryParse(mowerDescription.StartPosition,out MowerPosition startPosition))
+            if (!MowerPosition.TryParse(mowerDescription.StartPosition, out MowerPosition startPosition))
             {
                 throw new Exception("Wrong mower start position description");
             }
 
-            if (!TryParseRoute(mowerDescription.Route, out IEnumerable<MowerAction> route))
+            //if (!TryParseRoute(mowerDescription.Route, out IEnumerable<MowerAction> route))
+            //{
+            //    throw new Exception("Wrong route description");
+            //}
+
+            if (!mowerDescription.Route.IsMowerRoute())
             {
                 throw new Exception("Wrong route description");
             }
@@ -31,7 +37,7 @@ namespace LawnFile.Domain.Model
             return new Mower
             {
                 StartPosition = startPosition,
-                Route = route
+                Route = mowerDescription.Route//route
             };
         }
 
@@ -39,13 +45,11 @@ namespace LawnFile.Domain.Model
         {
             var actionDescriptions = routeDescription.ToCharArray();
 
-            
-            
-            var actionList= new List<MowerAction>(actionDescriptions.Length);
+            var actionList = new List<MowerAction>(actionDescriptions.Length);
 
             foreach (var item in actionDescriptions)
             {
-                if(!Enum.TryParse<MowerAction>(item.ToString(), out MowerAction action))
+                if (!Enum.TryParse<MowerAction>(item.ToString(), out MowerAction action))
                 {
                     route = null;
                     return false;

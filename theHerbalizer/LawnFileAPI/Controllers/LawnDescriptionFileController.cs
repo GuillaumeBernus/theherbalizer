@@ -1,12 +1,11 @@
-﻿using LawnFile.Domain.Interface;
+﻿using LawnFile.API.Configuration;
+using LawnFile.Domain.Interface;
 using LawnFile.Domain.Model;
-using LawnFile.API.Configuration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,17 +14,21 @@ namespace LawnFile.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class LawnFileController : ControllerBase
+    public class LawnDescriptionFileController : ControllerBase
     {
-        private readonly ILogger<LawnFileController> _logger;
+        private readonly ILogger<LawnDescriptionFileController> _logger;
 
         private readonly InputFileConfiguration _inputFileConfiguration;
+        private readonly FileTreatmentConfiguration _fileTreatmentConfiguration;
         private readonly ILawnFileHandler _lawnFileHandler;
 
-        public LawnFileController(ILogger<LawnFileController> logger, IOptions<InputFileConfiguration> inputFileConfiguration, ILawnFileHandler lawnFileHandler)
+        public LawnDescriptionFileController(ILogger<LawnDescriptionFileController> logger, IOptions<InputFileConfiguration> inputFileConfiguration
+           , IOptions<FileTreatmentConfiguration> fileTreatmentConfiguration
+            , ILawnFileHandler lawnFileHandler)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _inputFileConfiguration = inputFileConfiguration?.Value ?? throw new ArgumentNullException(nameof(inputFileConfiguration));
+            _fileTreatmentConfiguration = fileTreatmentConfiguration?.Value ?? throw new ArgumentNullException(nameof(fileTreatmentConfiguration));
             _lawnFileHandler = lawnFileHandler ?? throw new ArgumentNullException(nameof(lawnFileHandler));
         }
 
@@ -35,23 +38,33 @@ namespace LawnFile.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Lawn>> PostAsync(IFormFile formFile)
         {
-
             if (!CheckFile(formFile))
             {
                 return BadRequest();
             }
+            string filePath = await CopyFile(formFile).ConfigureAwait(false);
+            try
+            {
+                var lawn = await _lawnFileHandler.HandleAsync(filePath);
+                return Ok(lawn);
+            }
+            finally
+            {
+                System.IO.File.Delete(filePath);
+            }
+        }
 
-
-            var filePath = Path.Combine(@"c:\TMP\theHerbalizer\",//_config["StoredFilesPath"],
+        private async Task<string> CopyFile(IFormFile formFile)
+        {
+            var filePath = Path.Combine(_fileTreatmentConfiguration.TemporaryFileDirectoryPath,
                 Path.GetRandomFileName());
 
             using (var stream = System.IO.File.Create(filePath))
             {
                 await formFile.CopyToAsync(stream);
             }
-            var lawn = await _lawnFileHandler.HandleAsync(filePath);
 
-            return Ok(lawn);
+            return filePath;
         }
 
         private bool CheckFile(IFormFile formFile)
@@ -60,6 +73,17 @@ namespace LawnFile.API.Controllers
             {
                 return false;
             }
+
+            if (formFile.Length > _inputFileConfiguration.MaxSizeOctets)
+            {
+                return false;
+            }
+
+            if (!_inputFileConfiguration.AllowedExtensions.Contains(Path.GetExtension(formFile.FileName)))
+            {
+                return false;
+            }
+
             return true;
         }
     }

@@ -1,46 +1,40 @@
-﻿using MowerEngine.Models;
-using System;
+﻿using MowerEngine.Exceptions;
+using MowerEngine.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace MowerEngine.Tests.Unit
 {
     public class MowerRunTests
     {
-        [Fact]
-        public void Run_WhenOutOfTheLawn_ReturnsSamePosition()
+        [Theory]
+        [InlineData("FFF", 0, 3, Direction.N)]
+        [InlineData("FRFFFF", 4, 1, Direction.E)]
+        [InlineData("FRFFLF", 2, 2, Direction.N)]
+        [InlineData("FFFFFFFFFFFFFFFFRFFFFFFFFFFFFFFFFFFLLFLF", 4, 4, Direction.S)]
+        [InlineData("RFFFFFLFFFFFLFFLFFFF", 3, 1, Direction.S)]
+        public void RunTests_WhenLawnIs5On5AndStartPositionIs00N(string route, int expectedX, int expectedY, Direction expectedOrientation)
         {
-            var expectedPosition = new MowerPosition
-            {
-                Coordinates = new Point { X = 2, Y = 5 },
-                Orientation = Direction.N
-            };
-            
+            var expectedPosition = Tools.GetMowerPosition(expectedX, expectedY, expectedOrientation);
 
             var lawn = new Lawn
             {
-                Mowers = new List<Mower> (),
-                UpperRigthCorner = new Point { X = 5, Y = 5 }
+                Mowers = new List<Mower>(),
+                UpperRigthCorner = Tools.GetPoint(5, 5)
             };
 
-            var mower = new Mower
-            {
-                Position = expectedPosition.Clone() as MowerPosition,
-                Route = new List<MowerAction> { MowerAction.F },
-                Lawn = lawn
-            };
-            lawn.Mowers.Add(mower);
+            var mower = Tools.GetMower(0, 0, Direction.N, route, lawn);
 
             mower.Run();
-            Assert.Equal(expectedPosition.Orientation, mower.Position.Orientation);
-            Assert.NotNull(mower.Position.Coordinates);
-            Assert.Equal(expectedPosition.Coordinates.X, mower.Position.Coordinates.X);
-            Assert.Equal(expectedPosition.Coordinates.Y, mower.Position.Coordinates.Y);
+            Assert.Equal(expectedPosition, mower.Position);
         }
 
+        [Fact]
+        public void Run_WhenLawnIsNull_ThrowsInvalidLawnException()
+        {
+            var mower = Tools.GetMower(0, 0, Direction.N, "FF", null);
 
+            Assert.Throws<InvalidLawnException>(() => mower.Run());
+        }
     }
 }

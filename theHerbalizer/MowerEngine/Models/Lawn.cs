@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Text.Json.Serialization;
 
 namespace MowerEngine.Models
@@ -15,11 +14,10 @@ namespace MowerEngine.Models
 
         public Lawn()
         {
-
         }
 
         [JsonConstructor()]
-        public Lawn(List<Mower> mowers ):base()
+        public Lawn(List<Mower> mowers) : base()
         {
             mowers.ForEach(m => m.Lawn = this);
             this.Mowers = mowers;
@@ -35,11 +33,6 @@ namespace MowerEngine.Models
             }
 
             return result;
-        }
-
-        internal bool Contains(Point point)
-        {
-            return point.X >= 0 && point.Y >= 0 && point.X <= this.UpperRigthCorner.X && point.Y <= this.UpperRigthCorner.Y;
         }
     }
 }
