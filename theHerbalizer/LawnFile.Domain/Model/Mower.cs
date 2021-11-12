@@ -42,7 +42,7 @@ namespace LawnFile.Domain.Model
         /// <exception cref="System.Exception">Wrong route description</exception>
         private static Mower FromMowerDescription(MowerDescription mowerDescription)
         {
-            if (!MowerPosition.TryParse(mowerDescription.StartPosition, out MowerPosition startPosition))
+            if (!MowerPositionParser.TryParse(mowerDescription.StartPosition, out MowerPosition startPosition))
             {
                 throw new Exception("Wrong mower start position description");
             }

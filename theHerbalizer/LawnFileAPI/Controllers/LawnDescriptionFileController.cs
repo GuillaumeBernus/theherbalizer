@@ -40,7 +40,7 @@ namespace LawnFile.API.Controllers
         private readonly ILawnFileHandler _lawnFileHandler;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LawnDescriptionFileController"/> class.
+        /// Initializes a new instance of the <see cref="LawnDescriptionFileController" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="inputFileConfiguration">The input file configuration.</param>
@@ -66,7 +66,7 @@ namespace LawnFile.API.Controllers
         /// <param name="formFile">The form file.</param>
         /// <returns>A Task&lt;ActionResult`1&gt; representing the asynchronous operation.</returns>
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Lawn>> PostAsync(IFormFile formFile)

@@ -16,7 +16,7 @@ namespace LawnFile.Domain.Handler
     public class LawnFileHandler : ILawnFileHandler
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="LawnFileHandler"/> class.
+        /// Initializes a new instance of the <see cref="LawnFileHandler" /> class.
         /// </summary>
         public LawnFileHandler()
         {
