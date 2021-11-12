@@ -3,8 +3,20 @@ using MowerEngine.Models.Exceptions;
 
 namespace MowerEngine.Models.MoveHandler
 {
+    /// <summary>
+    /// Class MoveHandlerFrontMove.
+    /// Implements the <see cref="MowerEngine.Models.MoveHandler.MoveHandlerBase" />
+    /// </summary>
+    /// <seealso cref="MowerEngine.Models.MoveHandler.MoveHandlerBase" />
     public class MoveHandlerFrontMove : MoveHandlerBase
     {
+        /// <summary>
+        /// Applies the move.
+        /// </summary>
+        /// <param name="start">The start.</param>
+        /// <param name="lawn">The lawn.</param>
+        /// <param name="move">The move.</param>
+        /// <returns>MowerPosition.</returns>
         public override MowerPosition ApplyMove(MowerPosition start, Lawn lawn, Move move)
         {
 
@@ -32,6 +44,11 @@ namespace MowerEngine.Models.MoveHandler
             }
             return finish;
         }
+        /// <summary>
+        /// Applies the mower move internal.
+        /// </summary>
+        /// <param name="mower">The mower.</param>
+        /// <param name="move">The move.</param>
         public override void ApplyMowerMoveInternal(Mower mower, Move move)
         {
             switch (mower.Position.Orientation)
@@ -57,6 +74,14 @@ namespace MowerEngine.Models.MoveHandler
             }
         }
 
+        /// <summary>
+        /// Checks the specified mower.
+        /// </summary>
+        /// <param name="mower">The mower.</param>
+        /// <param name="move">The move.</param>
+        /// <exception cref="MowerEngine.Exceptions.InvalidLawnException"></exception>
+        /// <exception cref="MowerEngine.Models.Exceptions.WrongMoveTypeException"></exception>
+        /// <exception cref="MowerEngine.Models.Exceptions.InvalidValueForFrontMoveException"></exception>
         public override void Check(Mower mower, Move move)
         {
             base.Check(mower, move);

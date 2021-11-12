@@ -7,18 +7,37 @@ using System.Threading.Tasks;
 
 namespace MowerEngine.Models
 {
+    /// <summary>
+    /// Class Lawn.
+    /// </summary>
     public class Lawn
     {
+        /// <summary>
+        /// Gets or sets the upper rigth corner.
+        /// </summary>
+        /// <value>The upper rigth corner.</value>
         [Required]
         public Point UpperRigthCorner { get; set; }
 
+        /// <summary>
+        /// Gets or sets the mowers.
+        /// </summary>
+        /// <value>The mowers.</value>
         [Required]
         public List<Mower> Mowers { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Lawn"/> class.
+        /// </summary>
         public Lawn()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Lawn"/> class.
+        /// </summary>
+        /// <param name="mowers">The mowers.</param>
+        /// <param name="upperRigthCorner">The upper rigth corner.</param>
         [JsonConstructor()]
         public Lawn(List<Mower> mowers, Point upperRigthCorner) : base()
         {
@@ -27,6 +46,10 @@ namespace MowerEngine.Models
             this.Mowers = mowers;
         }
 
+        /// <summary>
+        /// Runs the mowers.
+        /// </summary>
+        /// <returns>List&lt;MowerPosition&gt;.</returns>
         public List<MowerPosition> RunMowers()
         {
             var result = new List<MowerPosition>(Mowers.Count);

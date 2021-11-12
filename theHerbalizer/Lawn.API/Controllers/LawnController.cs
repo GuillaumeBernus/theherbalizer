@@ -13,15 +13,22 @@ namespace Lawn.API.Controllers
     [Route("[controller]")]
     public class LawnController : ControllerBase
     {
+        /// <summary>
+        /// The logger
+        /// </summary>
         private readonly ILogger<LawnController> _logger;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LawnController"/> class.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
         public LawnController(ILogger<LawnController> logger)
         {
             _logger = logger;
         }
 
         /// <summary>
-        ///
+        /// Posts the specified lawn.
         /// </summary>
         /// <param name="lawn">a lawn description</param>
         /// <returns>the position of the different mowers of the lawn</returns>
