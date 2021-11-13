@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace MowerEngine.Models.Exceptions
+namespace MowerEngine.Exceptions
 {
     /// <summary>
     /// Class InvalidMoveDescriptionException.
-    /// Implements the <see cref="System.Exception" />
+    /// Implements the <see cref="Exception" />
     /// </summary>
-    /// <seealso cref="System.Exception" />
+    /// <seealso cref="Exception" />
     [Serializable]
     public class InvalidMoveDescriptionException : Exception
     {

@@ -9,14 +9,17 @@
         /// The n
         /// </summary>
         N = 0,
+
         /// <summary>
         /// The e
         /// </summary>
         E,
+
         /// <summary>
         /// The s
         /// </summary>
         S,
+
         /// <summary>
         /// The w
         /// </summary>

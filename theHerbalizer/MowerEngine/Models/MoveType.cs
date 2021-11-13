@@ -9,6 +9,7 @@
         /// The rotation
         /// </summary>
         Rotation,
+
         /// <summary>
         /// The front move
         /// </summary>

@@ -30,23 +30,10 @@ namespace MowerEngine.Models
         public Guid MowerId { get => _mowerId; }
 
         /// <summary>
-        /// The lawn
-        /// </summary>
-        private Lawn _lawn;
-
-        /// <summary>
         /// Gets or sets the lawn.
         /// </summary>
         /// <value>The lawn.</value>
-        public Lawn Lawn
-        {
-            get { return _lawn; }
-            set
-            {
-                _lawn = value;
-                Destination = this.Run();
-            }
-        }
+        public Lawn Lawn { get; set; }
 
         /// <summary>
         /// Gets or sets the position.
@@ -93,6 +80,7 @@ namespace MowerEngine.Models
             {
                 throw e;
             }
+            Destination = position;
             return position;
         }
     }

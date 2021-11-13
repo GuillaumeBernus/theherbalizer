@@ -1,4 +1,4 @@
-﻿using MowerEngine.Models.Exceptions;
+﻿using MowerEngine.Exceptions;
 using System.Linq;
 
 namespace MowerEngine.Models
@@ -13,7 +13,7 @@ namespace MowerEngine.Models
         /// </summary>
         /// <param name="stringMove">The string move.</param>
         /// <returns>Move.</returns>
-        /// <exception cref="MowerEngine.Models.Exceptions.InvalidMoveDescriptionException"></exception>
+        /// <exception cref="MowerEngine.Exceptions.InvalidMoveDescriptionException"></exception>
         public static Move Parse(string stringMove)
         {
             var move = new Move();
