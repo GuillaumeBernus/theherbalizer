@@ -1,4 +1,5 @@
-﻿using MowerEngine.Models.Exceptions;
+﻿using MowerEngine.Exceptions;
+using MowerEngine.Models.Exceptions;
 
 namespace MowerEngine.Models.MoveHandler
 {
@@ -7,22 +8,10 @@ namespace MowerEngine.Models.MoveHandler
     /// </summary>
     public abstract class MoveHandlerBase
     {
-        /// <summary>
-        /// Applies the mower move internal.
-        /// </summary>
-        /// <param name="mower">The mower.</param>
-        /// <param name="move">The move.</param>
-        public abstract void ApplyMowerMoveInternal(Mower mower, Move move);
-
-        /// <summary>
-        /// Moves the mower.
-        /// </summary>
-        /// <param name="mower">The mower.</param>
-        /// <param name="move">The move.</param>
-        public void MoveMower(Mower mower, Move move)
+        public MowerPosition MoveMower(MowerPosition start, Lawn lawn, Move move)
         {
-            Check(mower, move);
-            ApplyMowerMoveInternal(mower, move);
+            Check(lawn, move);
+            return ApplyMove(start, lawn, move);
         }
 
         /// <summary>
@@ -32,7 +21,7 @@ namespace MowerEngine.Models.MoveHandler
         /// <param name="lawn">The lawn.</param>
         /// <param name="move">The move.</param>
         /// <returns>MowerPosition.</returns>
-        public abstract MowerPosition ApplyMove(MowerPosition start, Lawn lawn, Move move);
+        protected abstract MowerPosition ApplyMove(MowerPosition start, Lawn lawn, Move move);
 
         /// <summary>
         /// Checks the specified mower.
@@ -41,11 +30,11 @@ namespace MowerEngine.Models.MoveHandler
         /// <param name="move">The move.</param>
         /// <exception cref="MowerEngine.Models.Exceptions.InvalidMowerException"></exception>
         /// <exception cref="MowerEngine.Models.MoveHandler.NullMoveException"></exception>
-        public virtual void Check(Mower mower, Move move)
+        protected virtual void Check(Lawn lawn, Move move)
         {
-            if (mower == null)
+            if (lawn?.UpperRigthCorner == null)
             {
-                throw new InvalidMowerException();
+                throw new InvalidLawnException();
             }
             if (move == null)
             {

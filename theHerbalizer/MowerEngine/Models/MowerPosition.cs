@@ -1,13 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace MowerEngine.Models
 {
     /// <summary>
     /// Class MowerPosition.
-    /// Implements the <see cref="System.IEquatable{MowerEngine.Models.MowerPosition}" />
+    /// Implements the <see cref="System.ICloneable" />
     /// </summary>
-    /// <seealso cref="System.IEquatable{MowerEngine.Models.MowerPosition}" />
-    public record MowerPosition
+    /// <seealso cref="System.ICloneable" />
+    public class MowerPosition : ICloneable
     {
         /// <summary>
         /// Gets or sets the coordinates.
@@ -15,6 +16,7 @@ namespace MowerEngine.Models
         /// <value>The coordinates.</value>
         [Required]
         public Point Coordinates { get; set; }
+
         /// <summary>
         /// Gets or sets the orientation.
         /// </summary>
@@ -22,5 +24,17 @@ namespace MowerEngine.Models
         [Required]
         public Direction Orientation { get; set; }
 
+        /// <summary>
+        /// Creates a new object that is a copy of the current instance.
+        /// </summary>
+        /// <returns>A new object that is a copy of this instance.</returns>
+        public object Clone()
+        {
+            return new MowerPosition
+            {
+                Coordinates = this.Coordinates.Clone() as Point,
+                Orientation = this.Orientation
+            };
+        }
     }
 }

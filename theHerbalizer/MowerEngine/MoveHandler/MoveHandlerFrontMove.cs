@@ -17,10 +17,9 @@ namespace MowerEngine.Models.MoveHandler
         /// <param name="lawn">The lawn.</param>
         /// <param name="move">The move.</param>
         /// <returns>MowerPosition.</returns>
-        public override MowerPosition ApplyMove(MowerPosition start, Lawn lawn, Move move)
+        protected override MowerPosition ApplyMove(MowerPosition start, Lawn lawn, Move move)
         {
-
-            var finish = start with { };
+            var finish = start.Clone() as MowerPosition;
             switch (finish.Orientation)
             {
                 case Direction.N:
@@ -44,35 +43,6 @@ namespace MowerEngine.Models.MoveHandler
             }
             return finish;
         }
-        /// <summary>
-        /// Applies the mower move internal.
-        /// </summary>
-        /// <param name="mower">The mower.</param>
-        /// <param name="move">The move.</param>
-        public override void ApplyMowerMoveInternal(Mower mower, Move move)
-        {
-            switch (mower.Position.Orientation)
-            {
-                case Direction.N:
-                    mower.Position.Coordinates.Y = System.Math.Min(mower.Position.Coordinates.Y + move.Value, mower.Lawn.UpperRigthCorner.Y);
-                    break;
-
-                case Direction.E:
-                    mower.Position.Coordinates.X = System.Math.Min(mower.Position.Coordinates.X + move.Value, mower.Lawn.UpperRigthCorner.X);
-                    break;
-
-                case Direction.S:
-                    mower.Position.Coordinates.Y = System.Math.Max(mower.Position.Coordinates.Y - move.Value, Constants.LawnMinY);
-                    break;
-
-                case Direction.W:
-                    mower.Position.Coordinates.X = System.Math.Max(mower.Position.Coordinates.X - move.Value, Constants.LawnMinX);
-                    break;
-
-                default:
-                    break;
-            }
-        }
 
         /// <summary>
         /// Checks the specified mower.
@@ -82,14 +52,9 @@ namespace MowerEngine.Models.MoveHandler
         /// <exception cref="MowerEngine.Exceptions.InvalidLawnException"></exception>
         /// <exception cref="MowerEngine.Models.Exceptions.WrongMoveTypeException"></exception>
         /// <exception cref="MowerEngine.Models.Exceptions.InvalidValueForFrontMoveException"></exception>
-        public override void Check(Mower mower, Move move)
+        protected override void Check(Lawn lawn, Move move)
         {
-            base.Check(mower, move);
-
-            if (mower!.Lawn?.UpperRigthCorner == null)
-            {
-                throw new InvalidLawnException();
-            }
+            base.Check(lawn, move);
 
             if (move.Type != MoveType.FrontMove)
             {

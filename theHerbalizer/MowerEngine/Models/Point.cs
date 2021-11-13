@@ -1,13 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace MowerEngine.Models
 {
     /// <summary>
     /// Class Point.
-    /// Implements the <see cref="System.IEquatable{MowerEngine.Models.Point}" />
+    /// Implements the <see cref="System.ICloneable" />
     /// </summary>
-    /// <seealso cref="System.IEquatable{MowerEngine.Models.Point}" />
-    public record Point
+    /// <seealso cref="System.ICloneable" />
+    public class Point : ICloneable
     {
         /// <summary>
         /// Gets or sets the x.
@@ -23,5 +24,13 @@ namespace MowerEngine.Models
         [Required]
         public int Y { get; set; }
 
+        public object Clone()
+        {
+            return new Point
+            {
+                X = this.X,
+                Y = this.Y
+            };
+        }
     }
 }

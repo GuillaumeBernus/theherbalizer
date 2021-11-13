@@ -33,6 +33,7 @@ namespace MowerEngine.Models
         /// The lawn
         /// </summary>
         private Lawn _lawn;
+
         /// <summary>
         /// Gets or sets the lawn.
         /// </summary>
@@ -40,9 +41,10 @@ namespace MowerEngine.Models
         public Lawn Lawn
         {
             get { return _lawn; }
-            set { 
+            set
+            {
                 _lawn = value;
-                Destination= this.Run2();
+                Destination = this.Run();
             }
         }
 
@@ -59,11 +61,12 @@ namespace MowerEngine.Models
         /// </summary>
         /// <value>The destination.</value>
         public MowerPosition Destination { get; internal set; }
+
         /// <summary>
         /// Gets the travel.
         /// </summary>
         /// <value>The travel.</value>
-        public List<Move> Travel =>  TravelParser.Parse(Route);
+        public List<Move> Travel => TravelParser.Parse(Route);
 
         /// <summary>
         /// Gets or sets the route.
@@ -75,28 +78,15 @@ namespace MowerEngine.Models
         /// <summary>
         /// Runs this instance.
         /// </summary>
-        /// <returns>Mower.</returns>
-        public Mower Run()
-        {
-            foreach (var move in Travel)
-            {
-                MoveHandlerFactory.GetMoveHandler(move).MoveMower(this, move);
-            }
-
-            return this;
-        }
-        /// <summary>
-        /// Run2s this instance.
-        /// </summary>
         /// <returns>MowerPosition.</returns>
-        private MowerPosition Run2()
+        public MowerPosition Run()
         {
-            var position = Position with { };
+            var position = Position.Clone() as MowerPosition;
             try
             {
                 foreach (var move in Travel)
                 {
-                    position = MoveHandlerFactory.GetMoveHandler(move).ApplyMove(position, Lawn, move);
+                    position = MoveHandlerFactory.GetMoveHandler(move).MoveMower(position, Lawn, move);
                 }
             }
             catch (Exception e)
