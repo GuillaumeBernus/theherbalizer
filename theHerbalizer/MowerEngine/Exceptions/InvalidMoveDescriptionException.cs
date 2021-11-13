@@ -9,7 +9,7 @@ namespace MowerEngine.Exceptions
     /// </summary>
     /// <seealso cref="Exception" />
     [Serializable]
-    public class InvalidMoveDescriptionException : Exception
+    public class InvalidMoveDescriptionException : InvalidDescriptionException
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="InvalidMoveDescriptionException"/> class.

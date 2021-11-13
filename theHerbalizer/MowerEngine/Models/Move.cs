@@ -18,12 +18,5 @@
         /// </summary>
         /// <value>The value.</value>
         public int Value { get; set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Move"/> class.
-        /// </summary>
-        public Move()
-        {
-        }
     }
 }

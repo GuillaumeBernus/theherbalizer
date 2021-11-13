@@ -9,6 +9,14 @@ namespace MowerEngine.Models
     public static class TravelParser
     {
         /// <summary>
+        /// The route delimitors characters arrays
+        /// </summary>
+        private static readonly Dictionary<bool, char[]> _routeDelimitors = new Dictionary<bool, char[]>(){
+                { false, new char[]{ Constants.FrontMoveCharacter } },
+                { true, new char[] { Constants.RightRotationCharacter, Constants.LeftRotationCharacter } }
+                };
+
+        /// <summary>
         /// Parses the specified route description.
         /// </summary>
         /// <param name="routeDescription">The route description.</param>
@@ -37,14 +45,9 @@ namespace MowerEngine.Models
 
             int start = 0, index = -1;
 
-            var delimitors = new Dictionary<bool, char[]>(){
-                { false, new char[]{ Constants.FrontMoveCharacter } },
-                { true, new char[] { Constants.RightRotationCharacter, Constants.LeftRotationCharacter } }
-                };
-
             var isCurrentMoveAFrontMove = stringRoute[0] == Constants.FrontMoveCharacter;
 
-            while ((index = stringRoute.IndexOfAny(delimitors[isCurrentMoveAFrontMove], start)) != -1)
+            while ((index = stringRoute.IndexOfAny(_routeDelimitors[isCurrentMoveAFrontMove], start)) != -1)
             {
                 if (index - start > 0)
                     result.Add(stringRoute.Substring(start, index - start));

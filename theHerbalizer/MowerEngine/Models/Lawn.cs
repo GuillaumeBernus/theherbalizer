@@ -53,6 +53,11 @@ namespace MowerEngine.Models
             return outputArray.ToList();
         }
 
+        /// <summary>
+        /// Withes the mowers.
+        /// </summary>
+        /// <param name="mowers">The mowers.</param>
+        /// <returns>Lawn.</returns>
         public Lawn WithMowers(List<Mower> mowers)
         {
             this.Mowers = mowers;
@@ -60,6 +65,11 @@ namespace MowerEngine.Models
             return this;
         }
 
+        /// <summary>
+        /// Withes the upper rigth corner.
+        /// </summary>
+        /// <param name="upperRigthCorner">The upper rigth corner.</param>
+        /// <returns>Lawn.</returns>
         public Lawn WithUpperRigthCorner(Point upperRigthCorner)
         {
             this.UpperRigthCorner = upperRigthCorner;

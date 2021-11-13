@@ -9,7 +9,7 @@ namespace MowerEngine.Exceptions
     /// </summary>
     /// <seealso cref="System.Exception" />
     [Serializable]
-    public class InvalidRouteDescriptionException : Exception
+    public class InvalidRouteDescriptionException : InvalidDescriptionException
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="InvalidRouteDescriptionException"/> class.

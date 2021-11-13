@@ -50,7 +50,7 @@ namespace MowerEngine.Models.MoveHandler
         /// <param name="mower">The mower.</param>
         /// <param name="move">The move.</param>
         /// <exception cref="MowerEngine.Exceptions.InvalidLawnException"></exception>
-        /// <exception cref="MowerEngine.Models.Exceptions.WrongMoveTypeException"></exception>
+        /// <exception cref="MowerEngine.Models.Exceptions.InvalidMoveTypeException"></exception>
         /// <exception cref="MowerEngine.Models.Exceptions.InvalidValueForFrontMoveException"></exception>
         protected override void Check(Lawn lawn, Move move)
         {
@@ -58,7 +58,7 @@ namespace MowerEngine.Models.MoveHandler
 
             if (move.Type != MoveType.FrontMove)
             {
-                throw new WrongMoveTypeException();
+                throw new InvalidMoveTypeException();
             }
 
             if (move.Value < 0)
