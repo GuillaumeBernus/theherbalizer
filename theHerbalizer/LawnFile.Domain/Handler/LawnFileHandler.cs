@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LawnFile.Domain.Handler
@@ -16,7 +18,6 @@ namespace LawnFile.Domain.Handler
     /// <seealso cref="LawnFile.Domain.Interface.ILawnFileHandler" />
     public class LawnFileHandler : ILawnFileHandler
     {
-
         private readonly ILawnApiClient _lawnAPIClient;
 
         /// <summary>
@@ -35,30 +36,26 @@ namespace LawnFile.Domain.Handler
         /// <exception cref="System.Exception">Empty file</exception>
         /// <exception cref="System.Exception">First Line is not a lawn description</exception>
         /// <exception cref="System.Exception">Wrong mower description</exception>
-        public async Task<Stream > HandleAsync(string filePath)
+        public async Task<Stream> HandleAsync(string filePath)
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();
 
-            var lawnDescription = await GetLawnDescriptionAsync(filePath).ConfigureAwait(false);
+            var lawn = await GetLawnAsync(filePath).ConfigureAwait(false);
             sw.Stop();
             long ms1 = sw.ElapsedMilliseconds;
-            sw.Restart();
-            var lawn = Lawn.FromLawnDescription(lawnDescription);
-            sw.Stop();
-            long ms2 = sw.ElapsedMilliseconds;
             sw.Restart();
 
             var mowerPositions = await _lawnAPIClient.TreatLawnDescriptionAsync(lawn).ConfigureAwait(false);
             sw.Stop();
-            long ms3 = sw.ElapsedMilliseconds;
+            long ms2 = sw.ElapsedMilliseconds;
             sw.Restart();
 
             var res = await TreatPositions(mowerPositions).ConfigureAwait(false);
             sw.Stop();
-            long ms4 = sw.ElapsedMilliseconds;
+            long ms3 = sw.ElapsedMilliseconds;
 
-            return res ;
+            return res;
         }
 
         private static async Task<Stream> TreatPositions(List<MowerPosition> mowerPositions)
@@ -76,11 +73,8 @@ namespace LawnFile.Domain.Handler
             return stream;
         }
 
-
-
         private async Task<LawnDescription> GetLawnDescriptionAsync(string filePath)
         {
-            
             using StreamReader srIn = new StreamReader(filePath, true);
 
             if (srIn.EndOfStream)
@@ -99,7 +93,7 @@ namespace LawnFile.Domain.Handler
             string mowers = await srIn.ReadToEndAsync().ConfigureAwait(false);
 
             var mowerDescriptions = ExtractMowerDescriptions(mowers);
-           
+
             sw0.Stop();
             long ms = sw0.ElapsedMilliseconds;
             return new LawnDescription
@@ -108,29 +102,103 @@ namespace LawnFile.Domain.Handler
                 MowerDescriptions = mowerDescriptions
             };
         }
-        public static  List<MowerDescription> ExtractMowerDescriptions(string source)
+
+        private async Task<Lawn> GetLawnAsync(string filePath)
+        {
+            using StreamReader srIn = new StreamReader(filePath, true);
+
+            if (srIn.EndOfStream)
+            {
+                throw new Exception("Empty file");
+            }
+
+            var lawnSize = await srIn.ReadLineAsync().ConfigureAwait(false);
+
+            if (!lawnSize.IsLawnDescription())
+            {
+                throw new Exception("First Line is not a lawn description");
+            }
+            Stopwatch sw0 = new Stopwatch();
+            sw0.Start();
+            string mowerDescriptions = await srIn.ReadToEndAsync().ConfigureAwait(false);
+
+            var mowers = ExtractMowers(mowerDescriptions);
+
+            sw0.Stop();
+            long ms = sw0.ElapsedMilliseconds;
+            return new Lawn
+            {
+                UpperRigthCorner = PointParser.Parse(lawnSize),
+                Mowers = mowers
+            };
+        }
+
+        private List<MowerDescription> ExtractMowerDescriptions(string source)
         {
             var lines = source.Split("\r\n");
             var count = lines.Length;
-            var mowerDescriptions = new List<MowerDescription>(count>1? count / 2:1);
-            for (int i = 0; i < count-1; i+=2)
-            {
-                var mowerDescription = new MowerDescription
-                {
-                    StartPosition = lines[i],
-                    Route = lines[i + 1]
-                };
-                if (!mowerDescription.Check())
-                {
-                    throw new Exception("Wrong mower description");
-                }
-                mowerDescriptions.Add(mowerDescription);
-            }
+            MowerDescription[] outputArray = new MowerDescription[count > 1 ? count / 2 : 1];
 
-            return mowerDescriptions;
+            var loopEnd = count - 1;
+
+            var waitHandle = new ManualResetEvent(false);
+            int counter = 0;
+
+            Parallel.For(0, loopEnd, index =>
+            {
+                if (index % 2 == 0)
+                {
+                    var outputIndex = index / 2;
+                    outputArray[outputIndex] = new MowerDescription()
+                    {
+                        StartPosition = lines[index],
+                        Route = lines[index + 1]
+                    };
+                }
+
+                if (Interlocked.Increment(ref counter) == loopEnd - 1)
+                {
+                    waitHandle.Set();
+                }
+            });
+
+            waitHandle.WaitOne();
+
+            return outputArray.ToList();
         }
 
+        private List<Mower> ExtractMowers(string source)
+        {
+            var lines = source.Split("\r\n");
+            var count = lines.Length;
+            Mower[] outputArray = new Mower[count > 1 ? count / 2 : 1];
 
+            var loopEnd = count - 1;
 
+            var waitHandle = new ManualResetEvent(false);
+            int counter = 0;
+
+            Parallel.For(0, loopEnd, index =>
+            {
+                if (index % 2 == 0)
+                {
+                    var outputIndex = index / 2;
+                    outputArray[outputIndex] = MowerParser.FromMowerDescription(new MowerDescription()
+                    {
+                        StartPosition = lines[index],
+                        Route = lines[index + 1]
+                    });
+                }
+
+                if (Interlocked.Increment(ref counter) == loopEnd - 1)
+                {
+                    waitHandle.Set();
+                }
+            });
+
+            waitHandle.WaitOne();
+
+            return outputArray.ToList();
+        }
     }
 }
