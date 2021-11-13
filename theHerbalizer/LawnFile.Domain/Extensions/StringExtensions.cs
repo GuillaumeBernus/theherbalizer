@@ -12,21 +12,21 @@ namespace LawnFile.Domain.Extensions
         /// </summary>
         /// <param name="line">The line.</param>
         /// <returns><c>true</c> if [is lawn description] [the specified line]; otherwise, <c>false</c>.</returns>
-        public static bool IsLawnDescription(this string line)
+        public static bool IsPointDescription(this string line)
         {
-            Regex regex = new Regex(@"^\d+ \d+$", RegexOptions.None);
+            Regex regex = new Regex(Constants.PointDescriptionRegex, RegexOptions.None);
 
             return regex.IsMatch(line);
         }
 
         /// <summary>
-        /// Determines whether [is mower description] [the specified line].
+        /// Determines whether [is position description] [the specified line].
         /// </summary>
         /// <param name="line">The line.</param>
-        /// <returns><c>true</c> if [is mower description] [the specified line]; otherwise, <c>false</c>.</returns>
-        public static bool IsMowerDescription(this string line)
+        /// <returns><c>true</c> if [is position description] [the specified line]; otherwise, <c>false</c>.</returns>
+        public static bool IsPositionDescription(this string line)
         {
-            Regex regex = new Regex(@"^\d+ \d+ (N|E|S|W)$", RegexOptions.None);
+            Regex regex = new Regex(Constants.PositionDescriptionRegex, RegexOptions.None);
 
             return regex.IsMatch(line);
         }
@@ -38,7 +38,7 @@ namespace LawnFile.Domain.Extensions
         /// <returns><c>true</c> if [is mower route] [the specified line]; otherwise, <c>false</c>.</returns>
         public static bool IsMowerRoute(this string line)
         {
-            Regex regex = new Regex(@"^(L|R|F)+$", RegexOptions.None);
+            Regex regex = new Regex(Constants.RouteDescriptionRegex, RegexOptions.None);
 
             return regex.IsMatch(line);
         }

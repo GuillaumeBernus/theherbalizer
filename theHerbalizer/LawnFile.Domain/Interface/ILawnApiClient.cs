@@ -7,8 +7,16 @@ using System.Threading.Tasks;
 
 namespace LawnFile.Domain.Interface
 {
+    /// <summary>
+    /// Interface ILawnApiClient
+    /// </summary>
     public interface ILawnApiClient
     {
-        Task<List<MowerPosition>> TreatLawnDescriptionAsync(Lawn lawn);
+        /// <summary>
+        /// Gets the mower positions asynchronous.
+        /// </summary>
+        /// <param name="lawn">The lawn.</param>
+        /// <returns>Task&lt;List&lt;MowerPosition&gt;&gt;.</returns>
+        Task<List<MowerPosition>> GetMowerPositionsAsync(Lawn lawn);
     }
 }

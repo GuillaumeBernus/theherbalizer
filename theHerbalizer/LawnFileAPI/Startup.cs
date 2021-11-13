@@ -55,12 +55,10 @@ namespace LawnFile.API
             services.Configure<InputFileConfiguration>(_configuration.GetSection("InputFile"));
             services.Configure<FileTreatmentConfiguration>(_configuration.GetSection("FileTreatment"));
             services.AddSingleton<ILawnFileHandler, LawnFileHandler>();
-            services.AddSingleton<IMowerPositionsHandler, MowerPositionsHandler>();
             services.AddSingleton<ILawnApiClient, LawnApiClient>();
-            services
-                .AddHttpClient(Constants.LawnApiClientName, client =>
-                {
 
+            services.AddHttpClient(Constants.LawnApiClientName, client =>
+                {
                     client.BaseAddress = new Uri(_configuration.GetValue<string>(Constants.LawnApiHost));
                 });
         }
@@ -73,7 +71,6 @@ namespace LawnFile.API
         /// <param name="env">The env.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-          
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -1,5 +1,6 @@
 ﻿using LawnFile.Domain.Interface;
 using LawnFile.Domain.Model;
+using LawnFile.Infrastructure.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -54,7 +55,7 @@ namespace LawnFile.Infrastructure
         /// <param name="lawn">The lawn.</param>
         /// <returns>A Task&lt;List`1&gt; representing the asynchronous operation.</returns>
         /// <exception cref="System.Exception"></exception>
-        public async Task<List<MowerPosition>> TreatLawnDescriptionAsync(Lawn lawn)
+        public async Task<List<MowerPosition>> GetMowerPositionsAsync(Lawn lawn)
         {
             var res = new List<MowerPosition>();
 
@@ -62,6 +63,7 @@ namespace LawnFile.Infrastructure
                     .CreateClient(Constants.LawnApiClientName);
 
             Uri uri = new Uri($"{httpClient.BaseAddress}{Constants.LawnApiRoute}");
+
             string serialized = JsonSerializer.Serialize(lawn, _jsonSerializerOptions);
             var requestContent = new StringContent(serialized, Encoding.UTF8, "application/json");
 
@@ -78,7 +80,7 @@ namespace LawnFile.Infrastructure
             }
             else
             {
-                throw new Exception(httpResponseMessage?.StatusCode.ToString());
+                throw new LawnApiException(httpResponseMessage?.StatusCode);
             }
             return res;
         }

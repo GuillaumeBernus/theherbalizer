@@ -1,4 +1,5 @@
 ﻿using LawnFile.API.Configuration;
+using LawnFile.Domain;
 using LawnFile.Domain.Interface;
 using LawnFile.Domain.Model;
 using Microsoft.AspNetCore.Http;
@@ -84,8 +85,18 @@ namespace LawnFile.API.Controllers
                 string mimeType = Constants.ResultFileMimeType;
                 return new FileStreamResult(stream, mimeType)
                 {
-                    FileDownloadName = "Positions.txt"
+                    FileDownloadName = _fileTreatmentConfiguration.OutputFileName
                 };
+            }
+            catch (InvalidDescriptionException e)
+            {
+                _logger.LogError(e, "Error in LawnDescriptionFileController PostAsync");
+                return BadRequest();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error in LawnDescriptionFileController PostAsync");
+                throw;
             }
             finally
             {

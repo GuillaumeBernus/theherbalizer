@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LawnFile.Domain.Extensions;
+using System;
 
 namespace LawnFile.Domain.Model
 {
@@ -7,7 +8,6 @@ namespace LawnFile.Domain.Model
     /// </summary>
     public static class MowerPositionParser
     {
-
         /// <summary>
         /// Tries to parse a string into a <c>MowerPosition</c>.
         /// </summary>
@@ -17,13 +17,12 @@ namespace LawnFile.Domain.Model
         public static bool TryParse(string startPosition, out MowerPosition mowerPosition)
         {
             mowerPosition = null;
-
-            var members = startPosition.Split(" ");
-
-            if (members.Length != Constants.PositionDescriptionMembersCount)
+            if (!startPosition.IsPositionDescription())
             {
                 return false;
             }
+
+            var members = startPosition.Split(" ");
 
             var pointDescription = $"{members[0]} {members[1]}";
 

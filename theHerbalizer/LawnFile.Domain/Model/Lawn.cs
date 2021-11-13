@@ -12,24 +12,11 @@ namespace LawnFile.Domain.Model
         /// </summary>
         /// <value>The upper rigth corner.</value>
         public Point UpperRigthCorner { get; set; }
+
         /// <summary>
         /// Gets or sets the mowers.
         /// </summary>
         /// <value>The mowers.</value>
         public List<Mower> Mowers { get; set; }
-
-        /// <summary>
-        /// Froms the lawn description.
-        /// </summary>
-        /// <param name="lawnDescription">The lawn description.</param>
-        /// <returns>Lawn.</returns>
-        internal static Lawn FromLawnDescription(LawnDescription lawnDescription)
-        {
-            return new Lawn
-            {
-                UpperRigthCorner = PointParser.Parse(lawnDescription.UpperRightCorner),
-                Mowers = MowerParser.FromMowerDescriptionList(lawnDescription.MowerDescriptions)
-            };
-        }
     }
 }
