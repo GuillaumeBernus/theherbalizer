@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Lawn\**" />
+    <Compile Remove="MowerEngine\**" />
+    <EmbeddedResource Remove="Lawn\**" />
+    <EmbeddedResource Remove="MowerEngine\**" />
+    <None Remove="Lawn\**" />
+    <None Remove="MowerEngine\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
     <PackageReference Include="Moq" Version="4.16.1" />
     <PackageReference Include="xunit" Version="2.4.1" />
@@ -22,11 +31,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MowerEngine\MowerEngine.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Lawn\" />
-    <Folder Include="MowerEngine\" />
   </ItemGroup>
 
 </Project>

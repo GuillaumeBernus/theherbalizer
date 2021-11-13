@@ -5,7 +5,7 @@ namespace LawnFile.Domain.Model
     /// <summary>
     /// Class MowerDescription.
     /// </summary>
-    internal class MowerDescription
+    public class MowerDescription
     {
         /// <summary>
         /// Gets or sets the start position.

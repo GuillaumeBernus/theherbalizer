@@ -16,5 +16,14 @@ namespace LawnFile.API
         /// </summary>
         public static readonly string ResultFileMimeType = "text/plain";
 
+
+        /// <summary>
+        /// The lawn API client name
+        /// </summary>
+        internal static readonly string LawnApiClientName = "LawnAPI";
+        /// <summary>
+        /// The lawn API host
+        /// </summary>
+        internal static readonly string LawnApiHost= "LawnApiHost";
     }
 }

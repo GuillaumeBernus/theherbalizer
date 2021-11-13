@@ -2,23 +2,41 @@
 
 namespace MowerEngine.Models.MoveHandler
 {
+    /// <summary>
+    /// Class MoveHandlerRotation.
+    /// Implements the <see cref="MowerEngine.Models.MoveHandler.MoveHandlerBase" />
+    /// </summary>
+    /// <seealso cref="MowerEngine.Models.MoveHandler.MoveHandlerBase" />
     public class MoveHandlerRotation : MoveHandlerBase
     {
-        private const int DirectionCount = 4;
-
-        public override void ApplyMowerMoveInternal(Mower mower, Move move)
+        /// <summary>
+        /// Applies the move.
+        /// </summary>
+        /// <param name="start">The start.</param>
+        /// <param name="lawn">The lawn.</param>
+        /// <param name="move">The move.</param>
+        /// <returns>MowerPosition.</returns>
+        protected override MowerPosition ApplyMove(MowerPosition start, Lawn lawn, Move move)
         {
-            int direction = ((int)mower.Position.Orientation + move.Value) % DirectionCount;
+            int direction = ((int)start.Orientation + move.Value) % Constants.DirectionCount;
             if (direction < 0)
             {
-                direction += DirectionCount;
+                direction += Constants.DirectionCount;
             }
-            mower.Position.Orientation = (Direction)direction;
+            var finish = start.Clone() as MowerPosition;
+            finish.Orientation = (Direction)direction;
+            return finish;
         }
 
-        public override void Check(Mower mower, Move move)
+        /// <summary>
+        /// Checks the specified mower.
+        /// </summary>
+        /// <param name="lawn">The lawn.</param>
+        /// <param name="move">The move.</param>
+        /// <exception cref="MowerEngine.Models.Exceptions.WrongMoveTypeException"></exception>
+        protected override void Check(Lawn lawn, Move move)
         {
-            base.Check(mower, move);
+            base.Check(lawn, move);
             if (move.Type != MoveType.Rotation)
             {
                 throw new WrongMoveTypeException();

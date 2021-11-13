@@ -1,6 +1,7 @@
 using LawnFile.API.Configuration;
 using LawnFile.Domain.Handler;
 using LawnFile.Domain.Interface;
+using LawnFile.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,7 +19,7 @@ namespace LawnFile.API
     public class Startup
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Startup"/> class.
+        /// Initializes a new instance of the <see cref="Startup" /> class.
         /// </summary>
         /// <param name="configuration">The configuration.</param>
         /// <exception cref="System.ArgumentNullException">configuration</exception>
@@ -55,6 +56,13 @@ namespace LawnFile.API
             services.Configure<FileTreatmentConfiguration>(_configuration.GetSection("FileTreatment"));
             services.AddSingleton<ILawnFileHandler, LawnFileHandler>();
             services.AddSingleton<IMowerPositionsHandler, MowerPositionsHandler>();
+            services.AddSingleton<ILawnApiClient, LawnApiClient>();
+            services
+                .AddHttpClient(Constants.LawnApiClientName, client =>
+                {
+
+                    client.BaseAddress = new Uri(_configuration.GetValue<string>(Constants.LawnApiHost));
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

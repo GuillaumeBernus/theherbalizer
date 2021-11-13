@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LawnFile.Domain\LawnFile.Domain.csproj" />
+    <ProjectReference Include="..\LawnFile.Infrastructure\LawnFile.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

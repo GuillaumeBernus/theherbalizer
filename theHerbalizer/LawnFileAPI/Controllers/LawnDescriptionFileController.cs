@@ -69,7 +69,7 @@ namespace LawnFile.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<Lawn>> PostAsync(IFormFile formFile)
+        public async Task<IActionResult> PostAsync(IFormFile formFile)
         {
             if (!CheckFile(formFile))
             {
@@ -78,9 +78,16 @@ namespace LawnFile.API.Controllers
             string filePath = await CopyFileAsync(formFile).ConfigureAwait(false);
             try
             {
-                var lawn = await _lawnFileHandler.HandleAsync(filePath).ConfigureAwait(false);
-                return Ok(lawn);
+
+                Stream stream = await _lawnFileHandler.HandleAsync(filePath).ConfigureAwait(false);
+                string mimeType = Constants.ResultFileMimeType;
+                return new FileStreamResult(stream, mimeType)
+                {
+                    FileDownloadName = "Positions.txt"
+                };
+                
             }
+
             finally
             {
                 System.IO.File.Delete(filePath);
@@ -94,6 +101,7 @@ namespace LawnFile.API.Controllers
         /// <returns>A Task&lt;System.String&gt; representing the asynchronous operation.</returns>
         private async Task<string> CopyFileAsync(IFormFile formFile)
         {
+            
             var filePath = Path.Combine(_fileTreatmentConfiguration.TemporaryFileDirectoryPath,
                 Path.GetRandomFileName());
 

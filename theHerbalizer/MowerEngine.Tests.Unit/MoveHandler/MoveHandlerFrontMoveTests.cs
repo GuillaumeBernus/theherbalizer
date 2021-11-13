@@ -10,65 +10,44 @@ namespace MowerEngine.Tests.Unit
     public class MoveHandlerFrontMoveTests
     {
         private readonly MoveHandlerFrontMove handler;
+        private Lawn _lawn;
+        private MowerPosition _startPosition;
 
         public MoveHandlerFrontMoveTests()
         {
             handler = new MoveHandlerFrontMove();
+            _lawn = new Lawn { UpperRigthCorner = Tools.GetPoint(5, 5) };
+            _startPosition = Tools.GetMowerPosition(0, 0, Direction.N);
         }
 
         [Fact]
-        public void RunTestsApplyMowerMove_WhenLawnIsNull_ThrowsInvalidLawnException()
+        public void MoveMower_WhenLawnIsNull_ThrowsInvalidLawnException()
         {
             var move = new Move { Type = MoveType.FrontMove, Value = 1 };
 
-            var mower = Tools.GetMower(0, 0, Direction.N, "", null);
-
-            Assert.Throws<InvalidLawnException>(() => handler.MoveMower(mower, move));
+            Assert.Throws<InvalidLawnException>(() => handler.MoveMower(_startPosition, null, move));
         }
 
         [Fact]
-        public void RunTestsApplyMowerMove_WhenMowerIsNull_ThrowsInvalidMowerException()
-        {
-            var move = new Move { Type = MoveType.FrontMove, Value = 1 };
-
-            Assert.Throws<InvalidMowerException>(() => handler.MoveMower(null, move));
-        }
-
-        [Fact]
-        public void RunTestsApplyMowerMove_WhenMoveIsRotational_ThrowsWrongMoveTypeException()
+        public void MoveMower_WhenMoveIsRotational_ThrowsWrongMoveTypeException()
         {
             var move = new Move { Type = MoveType.Rotation, Value = 1 };
 
-            var mower = Tools.GetMower(0, 0, Direction.N, "", null);
-
-            var lawn = new Lawn(new List<Mower> { mower });
-            lawn.UpperRigthCorner = Tools.GetPoint(5, 5);
-
-            Assert.Throws<WrongMoveTypeException>(() => handler.MoveMower(mower, move));
+            Assert.Throws<WrongMoveTypeException>(() => handler.MoveMower(_startPosition, _lawn, move));
         }
 
         [Fact]
-        public void RunTestsApplyMowerMove_WhenMoveValueIsNegative_ThrowsInvalidValueForFrontMove()
+        public void MoveMower_WhenMoveValueIsNegative_ThrowsInvalidValueForFrontMove()
         {
             var move = new Move { Type = MoveType.FrontMove, Value = -1 };
 
-            var mower = Tools.GetMower(0, 0, Direction.N, "", null);
-
-            var lawn = new Lawn(new List<Mower> { mower });
-            lawn.UpperRigthCorner = Tools.GetPoint(5, 5);
-
-            Assert.Throws<InvalidValueForFrontMoveException>(() => handler.MoveMower(mower, move));
+            Assert.Throws<InvalidValueForFrontMoveException>(() => handler.MoveMower(_startPosition, _lawn, move));
         }
 
         [Fact]
-        public void RunTestsApplyMowerMove_WhenMoveIsNull_ThrowsNullMoveException()
+        public void MoveMower_WhenMoveIsNull_ThrowsNullMoveException()
         {
-            var mower = Tools.GetMower(0, 0, Direction.N, "", null);
-
-            var lawn = new Lawn(new List<Mower> { mower });
-            lawn.UpperRigthCorner = Tools.GetPoint(5, 5);
-
-            Assert.Throws<NullMoveException>(() => handler.MoveMower(mower, null));
+            Assert.Throws<NullMoveException>(() => handler.MoveMower(_startPosition, _lawn, null));
         }
 
         [Theory]
@@ -82,19 +61,15 @@ namespace MowerEngine.Tests.Unit
         [InlineData(0, 0, Direction.W, 1, 0, 0)]
         [InlineData(5, 0, Direction.W, 1, 4, 0)]
         [InlineData(5, 0, Direction.W, 10, 0, 0)]
-        public void RunTestsApplyMowerMove_LawnOf5(int initialX, int initialY, Direction orientation, int moveValue, int expectedX, int expectedY)
+        public void RunMoveMowerTests_LawnOf5(int initialX, int initialY, Direction orientation, int moveValue, int expectedX, int expectedY)
         {
             var move = new Move { Type = MoveType.FrontMove, Value = moveValue };
             var expected = Tools.GetMowerPosition(expectedX, expectedY, orientation);
+            _startPosition = Tools.GetMowerPosition(initialX, initialY, orientation);
 
-            var mower = Tools.GetMower(X: initialX, Y: initialY, Orientation: orientation, "", null);
+            var actual = handler.MoveMower(_startPosition, _lawn, move);
 
-            var lawn = new Lawn(new List<Mower> { mower });
-            lawn.UpperRigthCorner = Tools.GetPoint(5, 5);
-
-            handler.MoveMower(mower, move);
-
-            Assert.Equal(mower.Position, expected);
+            Assert.Equal(actual, expected);
         }
     }
 }

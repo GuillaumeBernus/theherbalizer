@@ -3,41 +3,58 @@ using MowerEngine.Models.Exceptions;
 
 namespace MowerEngine.Models.MoveHandler
 {
+    /// <summary>
+    /// Class MoveHandlerFrontMove.
+    /// Implements the <see cref="MowerEngine.Models.MoveHandler.MoveHandlerBase" />
+    /// </summary>
+    /// <seealso cref="MowerEngine.Models.MoveHandler.MoveHandlerBase" />
     public class MoveHandlerFrontMove : MoveHandlerBase
     {
-        public override void ApplyMowerMoveInternal(Mower mower, Move move)
+        /// <summary>
+        /// Applies the move.
+        /// </summary>
+        /// <param name="start">The start.</param>
+        /// <param name="lawn">The lawn.</param>
+        /// <param name="move">The move.</param>
+        /// <returns>MowerPosition.</returns>
+        protected override MowerPosition ApplyMove(MowerPosition start, Lawn lawn, Move move)
         {
-            switch (mower.Position.Orientation)
+            var finish = start.Clone() as MowerPosition;
+            switch (finish.Orientation)
             {
                 case Direction.N:
-                    mower.Position.Coordinates.Y = System.Math.Min(mower.Position.Coordinates.Y + move.Value, mower.Lawn.UpperRigthCorner.Y);
+                    finish.Coordinates.Y = System.Math.Min(finish.Coordinates.Y + move.Value, lawn.UpperRigthCorner.Y);
                     break;
 
                 case Direction.E:
-                    mower.Position.Coordinates.X = System.Math.Min(mower.Position.Coordinates.X + move.Value, mower.Lawn.UpperRigthCorner.X);
+                    finish.Coordinates.X = System.Math.Min(finish.Coordinates.X + move.Value, lawn.UpperRigthCorner.X);
                     break;
 
                 case Direction.S:
-                    mower.Position.Coordinates.Y = System.Math.Max(mower.Position.Coordinates.Y - move.Value, Constants.LawnMinY);
+                    finish.Coordinates.Y = System.Math.Max(finish.Coordinates.Y - move.Value, Constants.LawnMinY);
                     break;
 
                 case Direction.W:
-                    mower.Position.Coordinates.X = System.Math.Max(mower.Position.Coordinates.X - move.Value, Constants.LawnMinX);
+                    finish.Coordinates.X = System.Math.Max(finish.Coordinates.X - move.Value, Constants.LawnMinX);
                     break;
 
                 default:
                     break;
             }
+            return finish;
         }
 
-        public override void Check(Mower mower, Move move)
+        /// <summary>
+        /// Checks the specified mower.
+        /// </summary>
+        /// <param name="mower">The mower.</param>
+        /// <param name="move">The move.</param>
+        /// <exception cref="MowerEngine.Exceptions.InvalidLawnException"></exception>
+        /// <exception cref="MowerEngine.Models.Exceptions.WrongMoveTypeException"></exception>
+        /// <exception cref="MowerEngine.Models.Exceptions.InvalidValueForFrontMoveException"></exception>
+        protected override void Check(Lawn lawn, Move move)
         {
-            base.Check(mower, move);
-
-            if (mower!.Lawn?.UpperRigthCorner == null)
-            {
-                throw new InvalidLawnException();
-            }
+            base.Check(lawn, move);
 
             if (move.Type != MoveType.FrontMove)
             {

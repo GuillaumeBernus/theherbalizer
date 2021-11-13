@@ -17,22 +17,22 @@ namespace MowerEngine.Tests.Unit
         {
             var expectedPosition = Tools.GetMowerPosition(expectedX, expectedY, expectedOrientation);
 
-            var lawn = new Lawn
-            {
-                Mowers = new List<Mower>(),
-                UpperRigthCorner = Tools.GetPoint(5, 5)
-            };
+            var mower = Tools.GetMower(0, 0, Direction.N, route);
 
-            var mower = Tools.GetMower(0, 0, Direction.N, route, lawn);
+            var lawn = new Lawn(new List<Mower> { mower }
+                                , Tools.GetPoint(5, 5));
 
-            mower.Run();
-            Assert.Equal(expectedPosition, mower.Position);
+            var actual = mower.Run();
+            Assert.NotNull(actual?.Coordinates);
+            Assert.Equal(expectedPosition.Coordinates.X, actual!.Coordinates.X);
+            Assert.Equal(expectedPosition.Coordinates.Y, actual!.Coordinates.Y);
+            Assert.Equal(expectedPosition.Orientation, actual!.Orientation);
         }
 
         [Fact]
         public void Run_WhenLawnIsNull_ThrowsInvalidLawnException()
         {
-            var mower = Tools.GetMower(0, 0, Direction.N, "FF", null);
+            var mower = Tools.GetMower(0, 0, Direction.N, "FF");
 
             Assert.Throws<InvalidLawnException>(() => mower.Run());
         }

@@ -33,7 +33,7 @@ namespace LawnFile.API.Controllers
         private readonly IMowerPositionsHandler _handler;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ResultFileController"/> class.
+        /// Initializes a new instance of the <see cref="ResultFileController" /> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="handler">The handler.</param>

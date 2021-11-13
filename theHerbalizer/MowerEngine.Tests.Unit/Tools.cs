@@ -47,13 +47,12 @@ namespace MowerEngine.Tests.Unit
             };
         }
 
-        public static Mower GetMower(int X, int Y, Direction Orientation, string route, Lawn lawn)
+        public static Mower GetMower(int X, int Y, Direction Orientation, string route)
         {
             return new Mower
             {
                 Position = GetMowerPosition(X, Y, Orientation),
                 Route = route,
-                Lawn = lawn
             };
         }
 

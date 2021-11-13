@@ -3,8 +3,17 @@ using System.Linq;
 
 namespace MowerEngine.Models
 {
+    /// <summary>
+    /// Class MoveParser.
+    /// </summary>
     public static class MoveParser
     {
+        /// <summary>
+        /// Parses the specified string move.
+        /// </summary>
+        /// <param name="stringMove">The string move.</param>
+        /// <returns>Move.</returns>
+        /// <exception cref="MowerEngine.Models.Exceptions.InvalidMoveDescriptionException"></exception>
         public static Move Parse(string stringMove)
         {
             var move = new Move();
