@@ -25,8 +25,7 @@ namespace LawnFile.Infrastructure
         /// <summary>
         /// The json serializer options
         /// </summary>
-        private static readonly JsonSerializerOptions _jsonSerializerOptions= GetJsonSerializerOptions();
-
+        private static readonly JsonSerializerOptions _jsonSerializerOptions = GetJsonSerializerOptions();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LawnApiClient"/> class.
@@ -36,7 +35,6 @@ namespace LawnFile.Infrastructure
         public LawnApiClient(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory));
-
         }
 
         /// <summary>
@@ -58,14 +56,13 @@ namespace LawnFile.Infrastructure
         /// <exception cref="System.Exception"></exception>
         public async Task<List<MowerPosition>> TreatLawnDescriptionAsync(Lawn lawn)
         {
-
             var res = new List<MowerPosition>();
 
             HttpClient httpClient = _httpClientFactory
                     .CreateClient(Constants.LawnApiClientName);
 
             Uri uri = new Uri($"{httpClient.BaseAddress}{Constants.LawnApiRoute}");
-            string serialized = JsonSerializer.Serialize(lawn);
+            string serialized = JsonSerializer.Serialize(lawn, _jsonSerializerOptions);
             var requestContent = new StringContent(serialized, Encoding.UTF8, "application/json");
 
             HttpResponseMessage httpResponseMessage = await httpClient.PostAsync(uri, requestContent).ConfigureAwait(false);
