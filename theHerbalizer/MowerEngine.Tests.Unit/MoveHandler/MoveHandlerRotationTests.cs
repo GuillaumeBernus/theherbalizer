@@ -24,7 +24,7 @@ namespace MowerEngine.Tests.Unit
         {
             var move = new Move { Type = MoveType.FrontMove, Value = 1 };
 
-            Assert.Throws<WrongMoveTypeException>(() => handler.MoveMower(_startPosition, _lawn, move));
+            Assert.Throws<InvalidMoveTypeException>(() => handler.MoveMower(_startPosition, _lawn, move));
         }
 
         [Fact]
