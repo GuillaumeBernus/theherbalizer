@@ -15,7 +15,7 @@ namespace MowerEngine.Tests.Unit
             mowers.Add(Tools.GetRandomMower(upperRigthCorner));
             mowers.Add(Tools.GetRandomMower(upperRigthCorner));
             mowers.Add(Tools.GetRandomMower(upperRigthCorner));
-            var lawn = new Lawn(mowers, upperRigthCorner);
+            var lawn = new Lawn().WithMowers(mowers).WithUpperRigthCorner(upperRigthCorner);
 
             var actual = lawn.RunMowers();
 

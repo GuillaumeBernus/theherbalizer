@@ -18,10 +18,7 @@ namespace MowerEngine.Tests.Unit
             var expectedPosition = Tools.GetMowerPosition(expectedX, expectedY, expectedOrientation);
 
             var mower = Tools.GetMower(0, 0, Direction.N, route);
-
-            var lawn = new Lawn(new List<Mower> { mower }
-                                , Tools.GetPoint(5, 5));
-
+            mower.Lawn = new Lawn().WithUpperRigthCorner(Tools.GetPoint(5, 5));
             var actual = mower.Run();
             Assert.NotNull(actual?.Coordinates);
             Assert.Equal(expectedPosition.Coordinates.X, actual!.Coordinates.X);
