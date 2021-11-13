@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace LawnFile.Infrastructure.Exceptions
 {
     [Serializable]
-    internal class LawnApiException : Exception
+    public class LawnApiException : Exception
     {
         private HttpStatusCode? statusCode;
 
