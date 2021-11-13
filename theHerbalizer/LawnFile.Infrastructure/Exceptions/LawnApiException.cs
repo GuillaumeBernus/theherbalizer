@@ -7,8 +7,6 @@ namespace LawnFile.Infrastructure.Exceptions
     [Serializable]
     public class LawnApiException : Exception
     {
-        private HttpStatusCode? statusCode;
-
         public LawnApiException()
         {
         }
