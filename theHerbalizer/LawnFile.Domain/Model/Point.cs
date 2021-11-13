@@ -7,7 +7,6 @@ namespace LawnFile.Domain.Model
     /// </summary>
     public class Point
     {
-
         /// <summary>
         /// Gets or sets the x.
         /// </summary>
@@ -22,8 +21,6 @@ namespace LawnFile.Domain.Model
         [JsonPropertyName("y")]
         public int Y { get; set; }
 
-
-
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
@@ -32,7 +29,5 @@ namespace LawnFile.Domain.Model
         {
             return $"{X} {Y}";
         }
-
-
     }
 }

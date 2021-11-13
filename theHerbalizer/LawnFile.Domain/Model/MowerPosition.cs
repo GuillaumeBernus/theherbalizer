@@ -26,7 +26,5 @@ namespace LawnFile.Domain.Model
         {
             return $"{Coordinates?.ToString() ?? String.Empty} {Orientation}";
         }
-
-
     }
 }

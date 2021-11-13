@@ -7,7 +7,6 @@ namespace LawnFile.Domain.Model
     /// </summary>
     public static class PointParser
     {
-
         /// <summary>
         /// Froms the point description.
         /// </summary>
@@ -18,7 +17,7 @@ namespace LawnFile.Domain.Model
         {
             if (!TryParse(pointDescription, out Point point))
             {
-                throw new Exception("Wrong point description");
+                throw new InvalidPointDescriptionException();
             }
 
             return point;
@@ -41,6 +40,5 @@ namespace LawnFile.Domain.Model
             point = new Point { X = x, Y = y };
             return true;
         }
-    
     }
 }

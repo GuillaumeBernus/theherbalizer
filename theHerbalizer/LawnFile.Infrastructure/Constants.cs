@@ -6,9 +6,19 @@ using System.Threading.Tasks;
 
 namespace LawnFile.Infrastructure
 {
-    static class Constants
+    /// <summary>
+    /// Class Constants.
+    /// </summary>
+    internal static class Constants
     {
-        internal static readonly string LawnApiClientName ="LawnAPI";
-        internal static readonly object LawnApiRoute="lawn";
+        /// <summary>
+        /// The lawn API client name
+        /// </summary>
+        internal static readonly string LawnApiClientName = "LawnAPI";
+
+        /// <summary>
+        /// The lawn API route
+        /// </summary>
+        internal static readonly object LawnApiRoute = "lawn";
     }
 }

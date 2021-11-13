@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace MowerEngine.Exceptions
+namespace LawnFile.Domain
 {
     /// <summary>
     /// Class InvalidRouteDescriptionException.
-    /// Implements the <see cref="System.Exception" />
+    /// Implements the <see cref="LawnFile.Domain.InvalidDescriptionException" />
     /// </summary>
-    /// <seealso cref="System.Exception" />
+    /// <seealso cref="LawnFile.Domain.InvalidDescriptionException" />
     [Serializable]
-    public class InvalidRouteDescriptionException : InvalidDescriptionException
+    internal class InvalidRouteDescriptionException : InvalidDescriptionException
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="InvalidRouteDescriptionException"/> class.
@@ -38,8 +38,8 @@ namespace MowerEngine.Exceptions
         /// <summary>
         /// Initializes a new instance of the <see cref="InvalidRouteDescriptionException"/> class.
         /// </summary>
-        /// <param name="info">The information.</param>
-        /// <param name="context">The context.</param>
+        /// <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
+        /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
         protected InvalidRouteDescriptionException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }

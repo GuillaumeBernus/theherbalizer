@@ -2,46 +2,38 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace LawnFile.Domain.Model
 {
     public static class MowerParser
-    { 
-        /// <summary>
-        /// Froms the mower description list.
-        /// </summary>
-        /// <param name="mowerDescriptions">The mower descriptions.</param>
-        /// <returns>List&lt;Mower&gt;.</returns>
-        internal static List<Mower> FromMowerDescriptionList(IEnumerable<MowerDescription> mowerDescriptions)
-        {
-            return mowerDescriptions.Select(FromMowerDescription).ToList();
-        }
-
+    {
         /// <summary>
         /// Froms the mower description.
         /// </summary>
-        /// <param name="mowerDescription">The mower description.</param>
+        /// <param name="position">The position.</param>
+        /// <param name="route">The route.</param>
         /// <returns>Mower.</returns>
         /// <exception cref="System.Exception">Wrong mower start position description</exception>
         /// <exception cref="System.Exception">Wrong route description</exception>
-        private static Mower FromMowerDescription(MowerDescription mowerDescription)
+        public static Mower Parse(string position, string route)
         {
-            if (!MowerPositionParser.TryParse(mowerDescription.StartPosition, out MowerPosition startPosition))
+            if (!MowerPositionParser.TryParse(position, out MowerPosition startPosition))
             {
-                throw new Exception("Wrong mower start position description");
+                throw new InvalidPositionDescriptionException();
             }
 
-            if (!mowerDescription.Route.IsMowerRoute())
+            if (!route.IsMowerRoute())
             {
-                throw new Exception("Wrong route description");
+                throw new InvalidRouteDescriptionException();
             }
 
             return new Mower
             {
                 StartPosition = startPosition,
-                Route = mowerDescription.Route
+                Route = route
             };
         }
-
     }
 }

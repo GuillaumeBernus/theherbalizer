@@ -1,5 +1,6 @@
 ﻿using LawnFile.Domain.Interface;
 using LawnFile.Domain.Model;
+using LawnFile.Infrastructure.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -25,8 +26,7 @@ namespace LawnFile.Infrastructure
         /// <summary>
         /// The json serializer options
         /// </summary>
-        private static readonly JsonSerializerOptions _jsonSerializerOptions= GetJsonSerializerOptions();
-
+        private static readonly JsonSerializerOptions _jsonSerializerOptions = GetJsonSerializerOptions();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LawnApiClient"/> class.
@@ -36,7 +36,6 @@ namespace LawnFile.Infrastructure
         public LawnApiClient(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory));
-
         }
 
         /// <summary>
@@ -56,16 +55,16 @@ namespace LawnFile.Infrastructure
         /// <param name="lawn">The lawn.</param>
         /// <returns>A Task&lt;List`1&gt; representing the asynchronous operation.</returns>
         /// <exception cref="System.Exception"></exception>
-        public async Task<List<MowerPosition>> TreatLawnDescriptionAsync(Lawn lawn)
+        public async Task<List<MowerPosition>> GetMowerPositionsAsync(Lawn lawn)
         {
-
             var res = new List<MowerPosition>();
 
             HttpClient httpClient = _httpClientFactory
                     .CreateClient(Constants.LawnApiClientName);
 
             Uri uri = new Uri($"{httpClient.BaseAddress}{Constants.LawnApiRoute}");
-            string serialized = JsonSerializer.Serialize(lawn);
+
+            string serialized = JsonSerializer.Serialize(lawn, _jsonSerializerOptions);
             var requestContent = new StringContent(serialized, Encoding.UTF8, "application/json");
 
             HttpResponseMessage httpResponseMessage = await httpClient.PostAsync(uri, requestContent).ConfigureAwait(false);
@@ -81,7 +80,7 @@ namespace LawnFile.Infrastructure
             }
             else
             {
-                throw new Exception(httpResponseMessage?.StatusCode.ToString());
+                throw new LawnApiException(httpResponseMessage?.StatusCode);
             }
             return res;
         }

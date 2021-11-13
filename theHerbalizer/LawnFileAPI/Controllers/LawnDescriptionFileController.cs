@@ -1,4 +1,5 @@
 ﻿using LawnFile.API.Configuration;
+using LawnFile.Domain;
 using LawnFile.Domain.Interface;
 using LawnFile.Domain.Model;
 using Microsoft.AspNetCore.Http;
@@ -30,10 +31,12 @@ namespace LawnFile.API.Controllers
         /// The input file configuration
         /// </summary>
         private readonly InputFileConfiguration _inputFileConfiguration;
+
         /// <summary>
         /// The file treatment configuration
         /// </summary>
         private readonly FileTreatmentConfiguration _fileTreatmentConfiguration;
+
         /// <summary>
         /// The lawn file handler
         /// </summary>
@@ -78,16 +81,23 @@ namespace LawnFile.API.Controllers
             string filePath = await CopyFileAsync(formFile).ConfigureAwait(false);
             try
             {
-
                 Stream stream = await _lawnFileHandler.HandleAsync(filePath).ConfigureAwait(false);
                 string mimeType = Constants.ResultFileMimeType;
                 return new FileStreamResult(stream, mimeType)
                 {
-                    FileDownloadName = "Positions.txt"
+                    FileDownloadName = _fileTreatmentConfiguration.OutputFileName
                 };
-                
             }
-
+            catch (InvalidDescriptionException e)
+            {
+                _logger.LogError(e, "Error in LawnDescriptionFileController PostAsync");
+                return BadRequest();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error in LawnDescriptionFileController PostAsync");
+                throw;
+            }
             finally
             {
                 System.IO.File.Delete(filePath);
@@ -101,14 +111,12 @@ namespace LawnFile.API.Controllers
         /// <returns>A Task&lt;System.String&gt; representing the asynchronous operation.</returns>
         private async Task<string> CopyFileAsync(IFormFile formFile)
         {
-            
             var filePath = Path.Combine(_fileTreatmentConfiguration.TemporaryFileDirectoryPath,
                 Path.GetRandomFileName());
 
-            using (var stream = System.IO.File.Create(filePath))
-            {
-                await formFile.CopyToAsync(stream).ConfigureAwait(false);
-            }
+            using var stream = System.IO.File.Create(filePath);
+
+            await formFile.CopyToAsync(stream).ConfigureAwait(false);
 
             return filePath;
         }

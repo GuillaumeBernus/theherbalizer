@@ -1,22 +1,28 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
-namespace LawnFile.Domain.Model
+namespace Lawn.API.Models
 {
     /// <summary>
     /// Class Lawn.
     /// </summary>
-    public class Lawn
+    public class LawnCommand
     {
         /// <summary>
         /// Gets or sets the upper rigth corner.
         /// </summary>
         /// <value>The upper rigth corner.</value>
-        public Point UpperRigthCorner { get; set; }
+        [Required]
+        public PointViewModel UpperRigthCorner { get; set; }
 
         /// <summary>
         /// Gets or sets the mowers.
         /// </summary>
         /// <value>The mowers.</value>
-        public List<Mower> Mowers { get; set; }
+        [Required]
+        public List<MowerViewModel> Mowers { get; set; }
     }
 }

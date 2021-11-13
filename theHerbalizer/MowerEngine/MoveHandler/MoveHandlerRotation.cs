@@ -33,13 +33,13 @@ namespace MowerEngine.Models.MoveHandler
         /// </summary>
         /// <param name="lawn">The lawn.</param>
         /// <param name="move">The move.</param>
-        /// <exception cref="MowerEngine.Models.Exceptions.WrongMoveTypeException"></exception>
+        /// <exception cref="MowerEngine.Models.Exceptions.InvalidMoveTypeException"></exception>
         protected override void Check(Lawn lawn, Move move)
         {
             base.Check(lawn, move);
             if (move.Type != MoveType.Rotation)
             {
-                throw new WrongMoveTypeException();
+                throw new InvalidMoveTypeException();
             }
         }
     }

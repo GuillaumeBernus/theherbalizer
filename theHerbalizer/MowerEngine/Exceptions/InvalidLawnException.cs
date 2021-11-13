@@ -9,7 +9,7 @@ namespace MowerEngine.Exceptions
     /// </summary>
     /// <seealso cref="System.Exception" />
     [Serializable]
-    public class InvalidLawnException : Exception
+    public class InvalidLawnException : InvalidDescriptionException
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="InvalidLawnException"/> class.

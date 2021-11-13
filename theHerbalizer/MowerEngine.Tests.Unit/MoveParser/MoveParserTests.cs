@@ -1,5 +1,5 @@
-﻿using MowerEngine.Models;
-using MowerEngine.Models.Exceptions;
+﻿using MowerEngine.Exceptions;
+using MowerEngine.Models;
 using Xunit;
 
 namespace MowerEngine.Tests.Unit

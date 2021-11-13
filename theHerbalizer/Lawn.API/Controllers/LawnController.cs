@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Lawn.API.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MowerEngine.Exceptions;
 using MowerEngine.Models;
 using System.Collections.Generic;
 
@@ -30,15 +32,41 @@ namespace Lawn.API.Controllers
         /// <summary>
         /// Posts the specified lawn.
         /// </summary>
-        /// <param name="lawn">a lawn description</param>
+        /// <param name="model">a lawn description</param>
         /// <returns>the position of the different mowers of the lawn</returns>
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(List<MowerPosition>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<List<MowerPosition>> Post([FromBody] MowerEngine.Models.Lawn lawn)
+        public ActionResult<List<MowerPosition>> Post([FromBody] LawnCommand model)
         {
-            return Ok(lawn.RunMowers());
+            if (model == null)
+            {
+                return BadRequest();
+            }
+            var lawn = LawnCommandAssembler.ToLawn(model);
+            List<MowerPosition> positions;
+            try
+            {
+                positions = lawn.RunMowers();
+            }
+            catch (InvalidMoveDescriptionException e)
+            {
+                _logger.LogError(e, "Error in LawnController.Post");
+                return BadRequest(e);
+            }
+            catch (InvalidLawnException e)
+            {
+                _logger.LogError(e, "Error in LawnController.Post");
+                return BadRequest(e);
+            }
+            catch (System.Exception e)
+            {
+                _logger.LogError(e, "Error in LawnController.Post");
+                throw;
+            }
+
+            return Ok(positions);
         }
     }
 }

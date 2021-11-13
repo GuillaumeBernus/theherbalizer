@@ -33,7 +33,7 @@ namespace MowerEngine.Tests.Unit
         {
             var move = new Move { Type = MoveType.Rotation, Value = 1 };
 
-            Assert.Throws<WrongMoveTypeException>(() => handler.MoveMower(_startPosition, _lawn, move));
+            Assert.Throws<InvalidMoveTypeException>(() => handler.MoveMower(_startPosition, _lawn, move));
         }
 
         [Fact]
@@ -69,7 +69,10 @@ namespace MowerEngine.Tests.Unit
 
             var actual = handler.MoveMower(_startPosition, _lawn, move);
 
-            Assert.Equal(actual, expected);
+            Assert.NotNull(actual?.Coordinates);
+            Assert.Equal(actual.Coordinates.X, expected.Coordinates.X);
+            Assert.Equal(actual.Coordinates.Y, expected.Coordinates.Y);
+            Assert.Equal(actual.Orientation, expected.Orientation);
         }
     }
 }
