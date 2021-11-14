@@ -22,7 +22,6 @@ namespace MowerEngine.Models
         /// </summary>
         /// <value>The position.</value>
         [Required]
-        [JsonPropertyName("startposition")]
         public MowerPosition Position { get; set; }
 
         /// <summary>

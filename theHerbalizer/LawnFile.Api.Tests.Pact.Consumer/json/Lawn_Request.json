@@ -1,0 +1,18 @@
+{
+  "UpperRigthCorner": {
+    "x": 5,
+    "y": 5
+  },
+  "Mowers": [
+    {
+      "StartPosition": {
+        "Coordinates": {
+          "x": 0,
+          "y": 0
+        },
+        "Orientation": "N"
+      },
+      "Route": "FF"
+    }
+	]
+}
