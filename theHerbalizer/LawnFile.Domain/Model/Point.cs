@@ -11,14 +11,12 @@ namespace LawnFile.Domain.Model
         /// Gets or sets the x.
         /// </summary>
         /// <value>The x.</value>
-        [JsonPropertyName("x")]
         public int X { get; set; }
 
         /// <summary>
         /// Gets or sets the y.
         /// </summary>
         /// <value>The y.</value>
-        [JsonPropertyName("y")]
         public int Y { get; set; }
 
         /// <summary>
