@@ -21,7 +21,7 @@ namespace LawnFile.Api.Tests.Pact.Consumer
 
         public LawnConsumer()
         {
-            PactBuilder = new PactBuilder(new PactConfig { PactDir = @"..\pacts", LogDir = @"c:\temp\logs" }); //Configures the PactDir and/or LogDir.
+            PactBuilder = new PactBuilder(new PactConfig { PactDir = @"..\..\..\pacts", LogDir = @"c:\temp\logs" }); //Configures the PactDir and/or LogDir.
 
             PactBuilder
               .ServiceConsumer("Lawn Consumer")
