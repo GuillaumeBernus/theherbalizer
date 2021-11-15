@@ -3,10 +3,9 @@
 namespace Lawn.API.Models
 {
     /// <summary>
-    /// Class MowerPosition.
-    /// Implements the <see cref="System.IEquatable{MowerEngine.Models.MowerPosition}" />
+    /// Class MowerPositionViewModel.
+    /// Implements the MowerPositionViewModel
     /// </summary>
-    /// <seealso cref="System.IEquatable{MowerEngine.Models.MowerPosition}" />
     public record MowerPositionViewModel
     {
         /// <summary>

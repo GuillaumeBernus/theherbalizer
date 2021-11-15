@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Lawn.API</name>
+    </assembly>
+    <members>
+        <member name="T:Lawn.API.Program">
+            <summary>
+            Class Program.
+            </summary>
+        </member>
+        <member name="M:Lawn.API.Program.Main(System.String[])">
+            <summary>
+            Defines the entry point of the application.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="M:Lawn.API.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Creates the host builder.
+            </summary>
+            <param name="args">The arguments.</param>
+            <returns>IHostBuilder.</returns>
+        </member>
+        <member name="T:Lawn.API.Startup">
+            <summary>
+            Class Startup.
+            </summary>
+        </member>
+        <member name="M:Lawn.API.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Lawn.API.Startup"/> class.
+            </summary>
+            <param name="configuration">The configuration.</param>
+        </member>
+        <member name="P:Lawn.API.Startup.Configuration">
+            <summary>
+            Gets the configuration.
+            </summary>
+            <value>The configuration.</value>
+        </member>
+        <member name="M:Lawn.API.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures the services.
+            </summary>
+            <param name="services">The services.</param>
+        </member>
+        <member name="M:Lawn.API.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Configures the specified application.
+            </summary>
+            <param name="app">The application.</param>
+            <param name="env">The env.</param>
+        </member>
+        <member name="T:Lawn.API.Controllers.LawnController">
+            <summary>
+            Controller that handles the lawn
+            </summary>
+        </member>
+        <member name="F:Lawn.API.Controllers.LawnController._logger">
+            <summary>
+            The logger
+            </summary>
+        </member>
+        <member name="M:Lawn.API.Controllers.LawnController.#ctor(Microsoft.Extensions.Logging.ILogger{Lawn.API.Controllers.LawnController})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Lawn.API.Controllers.LawnController"/> class.
+            </summary>
+            <param name="logger">The logger.</param>
+        </member>
+        <member name="M:Lawn.API.Controllers.LawnController.Post(Lawn.API.Models.LawnCommand)">
+            <summary>
+            Posts the specified lawn.
+            </summary>
+            <param name="model">a lawn description</param>
+            <returns>the position of the different mowers of the lawn</returns>
+        </member>
+        <member name="T:Lawn.API.Models.LawnCommand">
+            <summary>
+            Class Lawn.
+            </summary>
+        </member>
+        <member name="P:Lawn.API.Models.LawnCommand.UpperRigthCorner">
+            <summary>
+            Gets or sets the upper rigth corner.
+            </summary>
+            <value>The upper rigth corner.</value>
+        </member>
+        <member name="P:Lawn.API.Models.LawnCommand.Mowers">
+            <summary>
+            Gets or sets the mowers.
+            </summary>
+            <value>The mowers.</value>
+        </member>
+        <member name="T:Lawn.API.Models.LawnCommandAssembler">
+            <summary>
+            Class LawnCommandAssembler.
+            </summary>
+        </member>
+        <member name="M:Lawn.API.Models.LawnCommandAssembler.ToLawn(Lawn.API.Models.LawnCommand)">
+            <summary>
+            Converts to lawn.
+            </summary>
+            <param name="viewModel">The view model.</param>
+            <returns>MowerEngine.Models.Lawn.</returns>
+        </member>
+        <member name="M:Lawn.API.Models.LawnCommandAssembler.ToMower(Lawn.API.Models.MowerViewModel)">
+            <summary>
+            Converts to mower.
+            </summary>
+            <param name="viewModel">The view model.</param>
+            <returns>Mower.</returns>
+        </member>
+        <member name="M:Lawn.API.Models.LawnCommandAssembler.ToMowerPosition(Lawn.API.Models.MowerPositionViewModel)">
+            <summary>
+            Converts to mowerposition.
+            </summary>
+            <param name="viewModel">The view model.</param>
+            <returns>MowerPosition.</returns>
+        </member>
+        <member name="M:Lawn.API.Models.LawnCommandAssembler.ToPoint(Lawn.API.Models.PointViewModel)">
+            <summary>
+            Converts to point.
+            </summary>
+            <param name="viewModel">The view model.</param>
+            <returns>Point.</returns>
+        </member>
+        <member name="T:Lawn.API.Models.MowerPositionViewModel">
+            <summary>
+            Class MowerPositionViewModel.
+            Implements the MowerPositionViewModel
+            </summary>
+        </member>
+        <member name="P:Lawn.API.Models.MowerPositionViewModel.Coordinates">
+            <summary>
+            Gets or sets the coordinates.
+            </summary>
+            <value>The coordinates.</value>
+        </member>
+        <member name="P:Lawn.API.Models.MowerPositionViewModel.Orientation">
+            <summary>
+            Gets or sets the orientation.
+            </summary>
+            <value>The orientation.</value>
+        </member>
+        <member name="T:Lawn.API.Models.MowerViewModel">
+            <summary>
+            Class Mower.
+            </summary>
+        </member>
+        <member name="P:Lawn.API.Models.MowerViewModel.StartPosition">
+            <summary>
+            Gets or sets the position.
+            </summary>
+            <value>The position.</value>
+        </member>
+        <member name="P:Lawn.API.Models.MowerViewModel.Route">
+            <summary>
+            Gets or sets the route.
+            </summary>
+            <value>The route.</value>
+        </member>
+        <member name="T:Lawn.API.Models.PointViewModel">
+            <summary>
+            Class PointViewModel.
+            Implements the <see cref="!:System.IEquatable&lt;Lawn.API.Models.PointViewModel&gt;" />
+            </summary>
+            <seealso cref="!:System.IEquatable&lt;Lawn.API.Models.PointViewModel&gt;" />
+        </member>
+        <member name="P:Lawn.API.Models.PointViewModel.X">
+            <summary>
+            Gets or sets the x.
+            </summary>
+            <value>The x.</value>
+        </member>
+        <member name="P:Lawn.API.Models.PointViewModel.Y">
+            <summary>
+            Gets or sets the y.
+            </summary>
+            <value>The y.</value>
+        </member>
+    </members>
+</doc>

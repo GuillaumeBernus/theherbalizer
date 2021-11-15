@@ -25,7 +25,7 @@ namespace LawnFile.Domain.Handler
         /// </summary>
         public LawnFileHandler(ILawnApiClient lawnAPIClient)
         {
-            _lawnAPIClient = lawnAPIClient ?? throw new ArgumentNullException(nameof(lawnAPIClient)); ;
+            _lawnAPIClient = lawnAPIClient ?? throw new ArgumentNullException(nameof(lawnAPIClient));
         }
 
         /// <summary>

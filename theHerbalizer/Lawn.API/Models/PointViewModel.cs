@@ -3,10 +3,10 @@
 namespace Lawn.API.Models
 {
     /// <summary>
-    /// Class Point.
-    /// Implements the <see cref="System.IEquatable{MowerEngine.Models.Point}" />
+    /// Class PointViewModel.
+    /// Implements the <see cref="System.IEquatable{Lawn.API.Models.PointViewModel}" />
     /// </summary>
-    /// <seealso cref="System.IEquatable{MowerEngine.Models.Point}" />
+    /// <seealso cref="System.IEquatable{Lawn.API.Models.PointViewModel}" />
     public record PointViewModel
     {
         /// <summary>
@@ -22,6 +22,5 @@ namespace Lawn.API.Models
         /// <value>The y.</value>
         [Required]
         public int Y { get; set; }
-
     }
 }

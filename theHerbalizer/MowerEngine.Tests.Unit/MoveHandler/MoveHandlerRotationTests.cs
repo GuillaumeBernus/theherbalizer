@@ -46,9 +46,9 @@ namespace MowerEngine.Tests.Unit
             var actual = handler.MoveMower(_startPosition, _lawn, move);
 
             Assert.NotNull(actual?.Coordinates);
-            Assert.Equal(actual.Coordinates.X, expected.Coordinates.X);
-            Assert.Equal(actual.Coordinates.Y, expected.Coordinates.Y);
-            Assert.Equal(actual.Orientation, expected.Orientation);
+            Assert.Equal(actual!.Coordinates.X, expected.Coordinates.X);
+            Assert.Equal(actual!.Coordinates.Y, expected.Coordinates.Y);
+            Assert.Equal(actual!.Orientation, expected.Orientation);
         }
     }
 }
