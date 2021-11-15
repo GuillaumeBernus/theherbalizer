@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LawnFile.API</name>
+    </assembly>
+    <members>
+        <member name="T:LawnFile.API.Configuration.FileTreatmentConfiguration">
+            <summary>
+            Class FileTreatmentConfiguration.
+            </summary>
+        </member>
+        <member name="P:LawnFile.API.Configuration.FileTreatmentConfiguration.TemporaryFileDirectoryPath">
+            <summary>
+            Gets or sets the temporary file directory path.
+            </summary>
+            <value>The temporary file directory path.</value>
+        </member>
+        <member name="P:LawnFile.API.Configuration.FileTreatmentConfiguration.OutputFileName">
+            <summary>
+            Gets or sets the name of the output file.
+            </summary>
+            <value>The name of the output file.</value>
+        </member>
+        <member name="T:LawnFile.API.Configuration.InputFileConfiguration">
+            <summary>
+            Class InputFileConfiguration.
+            </summary>
+        </member>
+        <member name="P:LawnFile.API.Configuration.InputFileConfiguration.AllowedExtensions">
+            <summary>
+            Gets or sets the allowed extensions.
+            </summary>
+            <value>The allowed extensions.</value>
+        </member>
+        <member name="P:LawnFile.API.Configuration.InputFileConfiguration.MaxSizeOctets">
+            <summary>
+            Gets or sets the maximum size octets.
+            </summary>
+            <value>The maximum size octets.</value>
+        </member>
+        <member name="T:LawnFile.API.Constants">
+            <summary>
+            Class Constants.
+            </summary>
+        </member>
+        <member name="F:LawnFile.API.Constants.ResultFileMimeType">
+            <summary>
+            The result file MIME type
+            </summary>
+        </member>
+        <member name="F:LawnFile.API.Constants.LawnApiClientName">
+            <summary>
+            The lawn API client name
+            </summary>
+        </member>
+        <member name="F:LawnFile.API.Constants.LawnApiHost">
+            <summary>
+            The lawn API host
+            </summary>
+        </member>
+        <member name="T:LawnFile.API.Controllers.LawnDescriptionFileController">
+            <summary>
+            Class LawnDescriptionFileController.
+            Implements the <see cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="F:LawnFile.API.Controllers.LawnDescriptionFileController._logger">
+            <summary>
+            The logger
+            </summary>
+        </member>
+        <member name="F:LawnFile.API.Controllers.LawnDescriptionFileController._inputFileConfiguration">
+            <summary>
+            The input file configuration
+            </summary>
+        </member>
+        <member name="F:LawnFile.API.Controllers.LawnDescriptionFileController._fileTreatmentConfiguration">
+            <summary>
+            The file treatment configuration
+            </summary>
+        </member>
+        <member name="F:LawnFile.API.Controllers.LawnDescriptionFileController._lawnFileHandler">
+            <summary>
+            The lawn file handler
+            </summary>
+        </member>
+        <member name="M:LawnFile.API.Controllers.LawnDescriptionFileController.#ctor(Microsoft.Extensions.Logging.ILogger{LawnFile.API.Controllers.LawnDescriptionFileController},Microsoft.Extensions.Options.IOptions{LawnFile.API.Configuration.InputFileConfiguration},Microsoft.Extensions.Options.IOptions{LawnFile.API.Configuration.FileTreatmentConfiguration},LawnFile.Domain.Interface.ILawnFileHandler)">
+            <summary>
+            Initializes a new instance of the <see cref="T:LawnFile.API.Controllers.LawnDescriptionFileController" /> class.
+            </summary>
+            <param name="logger">The logger.</param>
+            <param name="inputFileConfiguration">The input file configuration.</param>
+            <param name="fileTreatmentConfiguration">The file treatment configuration.</param>
+            <param name="lawnFileHandler">The lawn file handler.</param>
+            <exception cref="T:System.ArgumentNullException">logger</exception>
+            <exception cref="T:System.ArgumentNullException">inputFileConfiguration</exception>
+            <exception cref="T:System.ArgumentNullException">fileTreatmentConfiguration</exception>
+            <exception cref="T:System.ArgumentNullException">lawnFileHandler</exception>
+        </member>
+        <member name="M:LawnFile.API.Controllers.LawnDescriptionFileController.PostAsync(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Treats the uploaded Lawn file and if it is valid, returns the file containing the mower positions after mowing
+            </summary>
+            <param name="formFile">The form file.</param>
+            <returns>the file containing the mower positions after mowing</returns>
+        </member>
+        <member name="M:LawnFile.API.Controllers.LawnDescriptionFileController.CopyFileAsync(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Copy file as an asynchronous operation.
+            </summary>
+            <param name="formFile">The form file.</param>
+            <returns>A Task&lt;System.String&gt; representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:LawnFile.API.Controllers.LawnDescriptionFileController.CheckFile(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Checks the file.
+            </summary>
+            <param name="formFile">The form file.</param>
+            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="T:LawnFile.API.Program">
+            <summary>
+            Class Program.
+            </summary>
+        </member>
+        <member name="M:LawnFile.API.Program.Main(System.String[])">
+            <summary>
+            Defines the entry point of the application.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="M:LawnFile.API.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Creates the host builder.
+            </summary>
+            <param name="args">The arguments.</param>
+            <returns>IHostBuilder.</returns>
+        </member>
+        <member name="T:LawnFile.API.Startup">
+            <summary>
+            Class Startup.
+            </summary>
+        </member>
+        <member name="M:LawnFile.API.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:LawnFile.API.Startup" /> class.
+            </summary>
+            <param name="configuration">The configuration.</param>
+            <exception cref="T:System.ArgumentNullException">configuration</exception>
+        </member>
+        <member name="F:LawnFile.API.Startup._configuration">
+            <summary>
+            The configuration
+            </summary>
+        </member>
+        <member name="M:LawnFile.API.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures the services.
+            </summary>
+            <param name="services">The services.</param>
+        </member>
+        <member name="M:LawnFile.API.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Configures the specified application.
+            </summary>
+            <param name="app">The application.</param>
+            <param name="env">The env.</param>
+        </member>
+    </members>
+</doc>

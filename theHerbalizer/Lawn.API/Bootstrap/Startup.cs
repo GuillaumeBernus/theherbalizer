@@ -5,6 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
+using Microsoft.Extensions.PlatformAbstractions;
+using System.IO;
+using System.Reflection;
 
 namespace Lawn.API
 {
@@ -13,6 +16,16 @@ namespace Lawn.API
     /// </summary>
     public class Startup
     {
+        private static string XmlCommentsFilePath
+        {
+            get
+            {
+                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                var fileName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name + ".xml";
+                return Path.Combine(basePath, fileName);
+            }
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Startup"/> class.
         /// </summary>
@@ -42,9 +55,10 @@ namespace Lawn.API
                 opts.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
             });
             services.AddRouting(options => options.LowercaseUrls = true);
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(options =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Lawn.API", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Lawn.API", Version = "v1" });
+                options.IncludeXmlComments(XmlCommentsFilePath);
             });
         }
 

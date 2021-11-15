@@ -64,10 +64,10 @@ namespace LawnFile.API.Controllers
         }
 
         /// <summary>
-        /// Post as an asynchronous operation.
+        /// Uploads a Lawn file and if it is valid, returns the file containing the mower positions after mowing
         /// </summary>
         /// <param name="formFile">The form file.</param>
-        /// <returns>A Task&lt;ActionResult`1&gt; representing the asynchronous operation.</returns>
+        /// <returns>the file containing the mower positions after mowing</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

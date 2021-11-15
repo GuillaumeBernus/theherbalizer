@@ -4,8 +4,16 @@ using System.Linq;
 
 namespace Lawn.API.Models
 {
+    /// <summary>
+    /// Class LawnCommandAssembler.
+    /// </summary>
     public static class LawnCommandAssembler
     {
+        /// <summary>
+        /// Converts to lawn.
+        /// </summary>
+        /// <param name="viewModel">The view model.</param>
+        /// <returns>MowerEngine.Models.Lawn.</returns>
         public static MowerEngine.Models.Lawn ToLawn(LawnCommand viewModel)
         {
             if (viewModel == null)
@@ -16,6 +24,11 @@ namespace Lawn.API.Models
             return new MowerEngine.Models.Lawn().WithMowers(viewModel.Mowers.Select(m => ToMower(m)).ToList()).WithUpperRigthCorner(ToPoint(viewModel.UpperRigthCorner));
         }
 
+        /// <summary>
+        /// Converts to mower.
+        /// </summary>
+        /// <param name="viewModel">The view model.</param>
+        /// <returns>Mower.</returns>
         private static Mower ToMower(MowerViewModel viewModel)
         {
             if (viewModel == null)
@@ -31,6 +44,11 @@ namespace Lawn.API.Models
             };
         }
 
+        /// <summary>
+        /// Converts to mowerposition.
+        /// </summary>
+        /// <param name="viewModel">The view model.</param>
+        /// <returns>MowerPosition.</returns>
         private static MowerPosition ToMowerPosition(MowerPositionViewModel viewModel)
         {
             if (viewModel == null)
@@ -49,6 +67,11 @@ namespace Lawn.API.Models
             };
         }
 
+        /// <summary>
+        /// Converts to point.
+        /// </summary>
+        /// <param name="viewModel">The view model.</param>
+        /// <returns>Point.</returns>
         public static Point ToPoint(PointViewModel viewModel)
         {
             if (viewModel == null)

@@ -7,8 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.OpenApi.Models;
 using System;
+using System.IO;
+using System.Reflection;
 using System.Text.Json.Serialization;
 
 namespace LawnFile.API
@@ -18,6 +21,16 @@ namespace LawnFile.API
     /// </summary>
     public class Startup
     {
+        private static string XmlCommentsFilePath
+        {
+            get
+            {
+                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                var fileName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name + ".xml";
+                return Path.Combine(basePath, fileName);
+            }
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Startup" /> class.
         /// </summary>
@@ -48,9 +61,10 @@ namespace LawnFile.API
                        opts.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
                    });
             services.AddRouting(options => options.LowercaseUrls = true);
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(options =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "LawnFile.API", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "LawnFile.API", Version = "v1" });
+                options.IncludeXmlComments(XmlCommentsFilePath);
             });
             services.Configure<InputFileConfiguration>(_configuration.GetSection("InputFile"));
             services.Configure<FileTreatmentConfiguration>(_configuration.GetSection("FileTreatment"));
@@ -82,6 +96,7 @@ namespace LawnFile.API
 
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LawnFile.API v1"));
+
             app.UseHttpsRedirection();
 
             app.UseRouting();

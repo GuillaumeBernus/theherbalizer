@@ -30,7 +30,7 @@ namespace Lawn.API.Controllers
         }
 
         /// <summary>
-        /// Posts the specified lawn.
+        /// Checks the Lawn description received and if it is valid, returns the list of the mowers's position after mowing
         /// </summary>
         /// <param name="model">a lawn description</param>
         /// <returns>the position of the different mowers of the lawn</returns>
