@@ -35,7 +35,7 @@ namespace Lawn.API.Controllers
         /// <param name="model">a lawn description</param>
         /// <returns>the position of the different mowers of the lawn</returns>
         [HttpPost]
-        [ProducesResponseType(typeof(List<MowerPosition>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(List<MowerPosition>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<List<MowerPosition>> Post([FromBody] LawnCommand model)
